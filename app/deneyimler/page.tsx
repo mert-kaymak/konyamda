@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useMemo } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
@@ -27,7 +28,7 @@ interface Experience {
   rating: number
   reviewCount: number
   isFeatured?: boolean
-  gradient: string
+  image: string
 }
 
 // ─── Mock Veri ─────────────────────────────────────────────────────────
@@ -45,7 +46,7 @@ const ALL_EXPERIENCES: Experience[] = [
     rating: 4.9,
     reviewCount: 128,
     isFeatured: true,
-    gradient: "from-[#7B2D35] to-[#3D1219]",
+    image: "https://plus.unsplash.com/premium_photo-1664475030299-590e428e77c0?w=800&q=80",
   },
   {
     id: "2",
@@ -60,7 +61,7 @@ const ALL_EXPERIENCES: Experience[] = [
     rating: 4.8,
     reviewCount: 94,
     isFeatured: true,
-    gradient: "from-[#92400e] to-[#451a03]",
+    image: "https://images.unsplash.com/photo-1632158930341-46604b637a0f?w=800&q=80",
   },
   {
     id: "3",
@@ -74,7 +75,7 @@ const ALL_EXPERIENCES: Experience[] = [
     durationMinutes: 240,
     rating: 5.0,
     reviewCount: 57,
-    gradient: "from-[#1a472a] to-[#0d2515]",
+    image: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=800&q=80",
   },
   {
     id: "4",
@@ -89,7 +90,7 @@ const ALL_EXPERIENCES: Experience[] = [
     rating: 4.9,
     reviewCount: 203,
     isFeatured: true,
-    gradient: "from-[#4c1d95] to-[#1e1b4b]",
+    image: "https://images.unsplash.com/photo-1529060256154-8dca470c3325?w=800&q=80",
   },
   {
     id: "5",
@@ -103,7 +104,7 @@ const ALL_EXPERIENCES: Experience[] = [
     durationMinutes: 90,
     rating: 4.7,
     reviewCount: 76,
-    gradient: "from-[#0c4a6e] to-[#082f49]",
+    image: "https://images.unsplash.com/photo-1518899150575-5ac29fbe2f3e?w=800&q=80",
   },
   {
     id: "6",
@@ -117,7 +118,7 @@ const ALL_EXPERIENCES: Experience[] = [
     durationMinutes: 120,
     rating: 4.8,
     reviewCount: 42,
-    gradient: "from-[#713f12] to-[#3d1f06]",
+    image: "https://plus.unsplash.com/premium_photo-1681053901938-a54612206f97?w=800&q=80",
   },
   {
     id: "7",
@@ -132,7 +133,7 @@ const ALL_EXPERIENCES: Experience[] = [
     rating: 4.9,
     reviewCount: 89,
     isFeatured: true,
-    gradient: "from-[#7f1d1d] to-[#450a0a]",
+    image: "https://images.unsplash.com/photo-1759736859407-a676ed566968?w=800&q=80",
   },
   {
     id: "8",
@@ -146,7 +147,7 @@ const ALL_EXPERIENCES: Experience[] = [
     durationMinutes: 240,
     rating: 4.8,
     reviewCount: 61,
-    gradient: "from-[#0e7490] to-[#083344]",
+    image: "https://images.unsplash.com/photo-1764789998734-653c1370ab01?w=800&q=80",
   },
   {
     id: "9",
@@ -160,7 +161,7 @@ const ALL_EXPERIENCES: Experience[] = [
     durationMinutes: 180,
     rating: 4.6,
     reviewCount: 38,
-    gradient: "from-[#166534] to-[#052e16]",
+    image: "https://images.unsplash.com/photo-1745670922388-cc34082bb8cb?w=800&q=80",
   },
   {
     id: "10",
@@ -174,7 +175,7 @@ const ALL_EXPERIENCES: Experience[] = [
     durationMinutes: 150,
     rating: 4.7,
     reviewCount: 53,
-    gradient: "from-[#831843] to-[#4a0020]",
+    image: "https://images.unsplash.com/photo-1638310533874-6c124c012e1d?w=800&q=80",
   },
 ]
 
@@ -370,13 +371,20 @@ function ExperienceCard({ exp }: { exp: Experience }) {
     <Link href={`/deneyimler/${exp.slug}`} className="group block">
       <div className="rounded-lg border border-gray-100 overflow-hidden bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
         {/* Resim alanı */}
-        <div className={`relative aspect-[4/3] bg-gradient-to-br ${exp.gradient}`}>
+        <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+          <Image
+            src={exp.image}
+            alt={exp.title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
           {exp.isFeatured && (
-            <Badge className="absolute top-3 left-3 bg-white/25 text-white border-white/30 text-xs backdrop-blur-sm">
+            <Badge className="absolute top-3 left-3 bg-white/20 text-white border-white/30 text-xs backdrop-blur-sm">
               Öne Çıkan
             </Badge>
           )}
-          <Badge className="absolute bottom-3 left-3 bg-black/30 text-white border-0 text-xs backdrop-blur-sm">
+          <Badge className="absolute bottom-3 left-3 bg-black/40 text-white border-0 text-xs backdrop-blur-sm">
             {exp.category}
           </Badge>
         </div>

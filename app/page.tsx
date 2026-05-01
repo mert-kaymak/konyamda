@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -46,7 +47,7 @@ const featured = [
     maxParticipants: "Max 8 kişi",
     category: "Kültür & Tarih",
     badge: "Öne Çıkan",
-    bg: "bg-[#7B2D35]",
+    image: "https://plus.unsplash.com/premium_photo-1664475030299-590e428e77c0?w=800&q=80",
   },
   {
     id: "2",
@@ -60,7 +61,7 @@ const featured = [
     maxParticipants: "Max 12 kişi",
     category: "Konya Mutfağı",
     badge: "Çok Sevilen",
-    bg: "bg-[#92400e]",
+    image: "https://images.unsplash.com/photo-1632158930341-46604b637a0f?w=800&q=80",
   },
   {
     id: "3",
@@ -74,7 +75,7 @@ const featured = [
     maxParticipants: "Max 10 kişi",
     category: "Gezi & Tur",
     badge: "Yeni",
-    bg: "bg-[#1a472a]",
+    image: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=800&q=80",
   },
 ]
 
@@ -203,13 +204,23 @@ export default function HomePage() {
                   key={exp.id}
                   className="overflow-hidden hover:shadow-xl transition-all duration-300 group border-gray-200 rounded-lg"
                 >
-                  <div className={`h-52 ${exp.bg} relative flex items-start p-4 gap-2`}>
-                    <Badge className="bg-white/20 text-white border-white/30 text-xs backdrop-blur-sm">
-                      {exp.badge}
-                    </Badge>
-                    <Badge className="bg-white/20 text-white border-white/30 text-xs backdrop-blur-sm">
-                      {exp.category}
-                    </Badge>
+                  <div className="relative h-52 overflow-hidden">
+                    <Image
+                      src={exp.image}
+                      alt={exp.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-black/25" />
+                    <div className="absolute top-4 left-4 flex gap-2 flex-wrap">
+                      <Badge className="bg-white/20 text-white border-white/30 text-xs backdrop-blur-sm">
+                        {exp.badge}
+                      </Badge>
+                      <Badge className="bg-white/20 text-white border-white/30 text-xs backdrop-blur-sm">
+                        {exp.category}
+                      </Badge>
+                    </div>
                   </div>
 
                   <CardContent className="p-5">

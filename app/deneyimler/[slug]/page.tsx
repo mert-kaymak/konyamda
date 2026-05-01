@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
@@ -40,11 +41,11 @@ const EXPERIENCE = {
   isFeatured: true,
 
   images: [
-    { id: 1, gradient: "from-[#7B2D35] to-[#5C1F27]", label: "Müze Girişi" },
-    { id: 2, gradient: "from-[#4c1d95] to-[#1e1b4b]", label: "Türbe" },
-    { id: 3, gradient: "from-[#0c4a6e] to-[#082f49]", label: "Çini Köşk" },
-    { id: 4, gradient: "from-[#713f12] to-[#3d1f06]", label: "Bahçe" },
-    { id: 5, gradient: "from-[#1a472a] to-[#0d2515]", label: "Semazenhane" },
+    { id: 1, url: "https://plus.unsplash.com/premium_photo-1664475030299-590e428e77c0?w=1200&q=85", label: "Müze Girişi" },
+    { id: 2, url: "https://images.unsplash.com/photo-1518899150575-5ac29fbe2f3e?w=1200&q=85", label: "Türbe" },
+    { id: 3, url: "https://images.unsplash.com/photo-1529060256154-8dca470c3325?w=1200&q=85", label: "Çini Köşk" },
+    { id: 4, url: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=1200&q=85", label: "Bahçe" },
+    { id: 5, url: "https://plus.unsplash.com/premium_photo-1681053901938-a54612206f97?w=1200&q=85", label: "Semazenhane" },
   ],
 
   description: `Konya'nın kalbinde, 13. yüzyılın mistik atmosferini teneffüs edeceğiniz bu özel turda deneyimli rehberimiz eşliğinde Mevlana Türbesi ve Müzesi'ni keşfedeceksiniz.
@@ -130,25 +131,46 @@ function ImageGallery({
 
   return (
     <div className="space-y-2">
-      <div
-        className={`w-full h-80 md:h-[420px] rounded-lg bg-gradient-to-br ${active.gradient} transition-all duration-500 relative overflow-hidden`}
-      >
-        <div className="absolute inset-0 bg-black/10" />
-        <span className="absolute bottom-4 left-4 text-white/70 text-sm font-medium">
+      {/* Ana fotoğraf */}
+      <div className="relative w-full h-80 md:h-[420px] rounded-lg overflow-hidden bg-gray-100">
+        <Image
+          key={active.id}
+          src={active.url}
+          alt={active.label}
+          fill
+          className="object-cover transition-opacity duration-300"
+          sizes="(max-width: 768px) 100vw, 66vw"
+          priority={active.id === 1}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <span className="absolute bottom-4 left-4 text-white text-sm font-medium drop-shadow">
           {active.label}
         </span>
-        <span className="absolute bottom-4 right-4 text-white/60 text-xs">
+        <span className="absolute bottom-4 right-4 text-white/70 text-xs drop-shadow">
           {activeId} / {images.length}
         </span>
       </div>
+
+      {/* Thumbnail'lar */}
       <div className="flex gap-2">
         {images.map((img) => (
           <button
             key={img.id}
             onClick={() => onSelect(img.id)}
-            className={`flex-1 h-16 rounded-lg bg-gradient-to-br ${img.gradient} transition-all duration-200 relative overflow-hidden
-              ${activeId === img.id ? "ring-2 ring-[#7B2D35] ring-offset-2 opacity-100" : "opacity-60 hover:opacity-85"}`}
-          />
+            className={`flex-1 h-16 rounded-lg overflow-hidden relative bg-gray-100 transition-all duration-200
+              ${activeId === img.id
+                ? "ring-2 ring-[#7B2D35] ring-offset-2 opacity-100"
+                : "opacity-55 hover:opacity-80"
+              }`}
+          >
+            <Image
+              src={img.url}
+              alt={img.label}
+              fill
+              className="object-cover"
+              sizes="20vw"
+            />
+          </button>
         ))}
       </div>
     </div>
