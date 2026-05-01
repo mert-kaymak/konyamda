@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -19,7 +20,8 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
-        <Link href="/" className="text-xl font-bold text-[#7B2D35]">
+        <Link href="/" className="flex items-center gap-2 text-xl font-bold text-[#7B2D35]">
+          <Image src="/logo.png" alt="konyamda" width={36} height={36} className="object-contain" />
           konyamda
         </Link>
 
