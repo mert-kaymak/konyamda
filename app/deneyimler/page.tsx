@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import Navbar from "@/components/navbar"
@@ -8,13 +9,13 @@ import Footer from "@/components/footer"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Slider } from "@/components/ui/slider"
-import { Clock, Filter, MapPin, Star, SlidersHorizontal } from "lucide-react"
+import { Clock, Filter, MapPin, Search, Star, SlidersHorizontal } from "lucide-react"
 
-// ─── Tipler ────────────────────────────────────────────────────────────
 interface Experience {
   id: string
   slug: string
@@ -31,7 +32,6 @@ interface Experience {
   image: string
 }
 
-// ─── Mock Veri ─────────────────────────────────────────────────────────
 const ALL_EXPERIENCES: Experience[] = [
   {
     id: "1",
@@ -188,6 +188,16 @@ const ALL_CATEGORIES = [
   "Doğa & Macera",
 ]
 
+// Anasayfa kategori slug'larını gerçek kategori adlarına eşle
+const KATEGORI_SLUG_MAP: Record<string, string> = {
+  "mevlana-tasavvuf": "Mevlana & Tasavvuf",
+  "konya-mutfagi": "Konya Mutfağı",
+  "doga-macera": "Doğa & Macera",
+  "sanat-el-sanatlari": "Sanat & El Sanatları",
+  "kultur-tarih": "Kültür & Tarih",
+  "gezi-tur": "Gezi & Tur",
+}
+
 const DURATION_OPTIONS = [
   { label: "1 saat altı", id: "short", min: 0, max: 59 },
   { label: "1 – 3 saat", id: "medium", min: 60, max: 180 },
@@ -200,7 +210,6 @@ const SORT_OPTIONS = [
   { value: "rating_desc", label: "En Yüksek Puan" },
 ]
 
-// ─── Yardımcı: süreyi Türkçe metne çevir ───────────────────────────────
 function formatDuration(minutes: number) {
   if (minutes < 60) return `${minutes} dk`
   const h = Math.floor(minutes / 60)
@@ -208,7 +217,6 @@ function formatDuration(minutes: number) {
   return m > 0 ? `${h} sa ${m} dk` : `${h} saat`
 }
 
-// ─── Filtre Paneli içeriği ──────────────────────────────────────────────
 function FilterContent({
   selectedCategories,
   setSelectedCategories,
@@ -256,7 +264,6 @@ function FilterContent({
 
   return (
     <div className="space-y-6">
-      {/* Sıralama */}
       <div>
         <h3 className="font-semibold text-gray-900 mb-3">Sıralama</h3>
         <div className="space-y-2">
@@ -280,7 +287,6 @@ function FilterContent({
 
       <Separator />
 
-      {/* Kategori */}
       <div>
         <h3 className="font-semibold text-gray-900 mb-3">Kategori</h3>
         <div className="space-y-2.5">
@@ -305,7 +311,6 @@ function FilterContent({
 
       <Separator />
 
-      {/* Fiyat Aralığı */}
       <div>
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-semibold text-gray-900">Fiyat Aralığı</h3>
@@ -329,7 +334,6 @@ function FilterContent({
 
       <Separator />
 
-      {/* Süre */}
       <div>
         <h3 className="font-semibold text-gray-900 mb-3">Süre</h3>
         <div className="space-y-2.5">
@@ -365,12 +369,10 @@ function FilterContent({
   )
 }
 
-// ─── Deneyim Kartı ──────────────────────────────────────────────────────
 function ExperienceCard({ exp }: { exp: Experience }) {
   return (
     <Link href={`/deneyimler/${exp.slug}`} className="group block">
       <div className="rounded-lg border border-gray-100 overflow-hidden bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-        {/* Resim alanı */}
         <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
           <Image
             src={exp.image}
@@ -389,7 +391,6 @@ function ExperienceCard({ exp }: { exp: Experience }) {
           </Badge>
         </div>
 
-        {/* İçerik */}
         <div className="p-4">
           <h3 className="font-semibold text-gray-900 text-sm leading-snug mb-2 group-hover:text-[#7B2D35] transition-colors line-clamp-2">
             {exp.title}
@@ -433,16 +434,42 @@ function ExperienceCard({ exp }: { exp: Experience }) {
   )
 }
 
-// ─── Ana Sayfa ──────────────────────────────────────────────────────────
 export default function ExperiencesPage() {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  const searchParams = useSearchParams()
+
+  const qParam = searchParams.get("q") ?? ""
+  const kategoriParam = searchParams.get("kategori") ?? ""
+
+  const [searchQuery, setSearchQuery] = useState(qParam)
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
+    const mapped = KATEGORI_SLUG_MAP[kategoriParam]
+    return mapped ? [mapped] : []
+  })
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 2000])
   const [selectedDurations, setSelectedDurations] = useState<string[]>([])
   const [sortBy, setSortBy] = useState("recommended")
   const [sheetOpen, setSheetOpen] = useState(false)
 
+  // URL params değişirse state'i güncelle (tarayıcı geri/ileri)
+  useEffect(() => {
+    setSearchQuery(searchParams.get("q") ?? "")
+    const mapped = KATEGORI_SLUG_MAP[searchParams.get("kategori") ?? ""]
+    setSelectedCategories(mapped ? [mapped] : [])
+  }, [searchParams])
+
   const filtered = useMemo(() => {
     let list = [...ALL_EXPERIENCES]
+
+    if (searchQuery.trim()) {
+      const q = searchQuery.trim().toLowerCase()
+      list = list.filter(
+        (e) =>
+          e.title.toLowerCase().includes(q) ||
+          e.shortDesc.toLowerCase().includes(q) ||
+          e.category.toLowerCase().includes(q) ||
+          e.location.toLowerCase().includes(q)
+      )
+    }
 
     if (selectedCategories.length > 0) {
       list = list.filter((e) => selectedCategories.includes(e.category))
@@ -464,7 +491,7 @@ export default function ExperiencesPage() {
     else list.sort((a, b) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0))
 
     return list
-  }, [selectedCategories, priceRange, selectedDurations, sortBy])
+  }, [searchQuery, selectedCategories, priceRange, selectedDurations, sortBy])
 
   const filterProps = {
     selectedCategories,
@@ -487,9 +514,9 @@ export default function ExperiencesPage() {
       <Navbar />
 
       <main className="flex-1 bg-gray-50">
-        {/* Başlık şeridi */}
         <div className="bg-white border-b">
-          <div className="container mx-auto px-4 py-6">
+          <div className="container mx-auto px-4 py-6 space-y-4">
+            {/* Başlık + filtre butonu */}
             <div className="flex items-center justify-between gap-4">
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">Deneyimler</h1>
@@ -499,7 +526,6 @@ export default function ExperiencesPage() {
                 </p>
               </div>
 
-              {/* Mobil filtre butonu */}
               <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
                 <SheetTrigger asChild>
                   <Button
@@ -526,12 +552,22 @@ export default function ExperiencesPage() {
                 </SheetContent>
               </Sheet>
             </div>
+
+            {/* Arama kutusu */}
+            <div className="relative max-w-lg">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Input
+                placeholder="Ne denemek istiyorsunuz?"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-9 h-10"
+              />
+            </div>
           </div>
         </div>
 
         <div className="container mx-auto px-4 py-8">
           <div className="flex gap-8">
-            {/* ── Masaüstü Filtre Paneli ── */}
             <aside className="hidden md:block w-64 shrink-0">
               <div className="sticky top-24 bg-white rounded-lg border border-gray-100 shadow-sm p-5">
                 <div className="flex items-center gap-2 mb-5">
@@ -547,7 +583,6 @@ export default function ExperiencesPage() {
               </div>
             </aside>
 
-            {/* ── Kart Grid ── */}
             <div className="flex-1 min-w-0">
               {filtered.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-24 text-center">
@@ -556,12 +591,13 @@ export default function ExperiencesPage() {
                     Deneyim bulunamadı
                   </h3>
                   <p className="text-gray-500 text-sm mb-6">
-                    Farklı filtreler deneyin
+                    Farklı filtreler veya arama terimi deneyin
                   </p>
                   <Button
                     variant="outline"
                     className="border-[#7B2D35] text-[#7B2D35]"
                     onClick={() => {
+                      setSearchQuery("")
                       setSelectedCategories([])
                       setPriceRange([0, 2000])
                       setSelectedDurations([])
