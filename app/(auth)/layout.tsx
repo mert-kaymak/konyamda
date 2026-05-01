@@ -2,13 +2,13 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       {/* Sol — marka paneli (yalnız masaüstünde) */}
-      <div className="hidden lg:flex flex-col justify-between bg-gradient-to-br from-[#7B2D35] via-[#5C1F27] to-[#3D1219] p-12 text-white relative overflow-hidden">
+      <div className="hidden lg:flex flex-col justify-between bg-[#7B2D35] p-12 text-white relative overflow-hidden">
         {/* Dekoratif daireler */}
         <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-white/5 pointer-events-none" />
         <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-white/5 pointer-events-none" />
 
         <a href="/" className="text-2xl font-bold tracking-tight relative z-10">
-          KonyamDa
+          konyamda
         </a>
 
         <div className="relative z-10 space-y-6">
@@ -32,7 +32,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         </div>
 
         <p className="text-white/30 text-xs relative z-10">
-          © 2025 KonyamDa
+          © 2025 konyamda
         </p>
       </div>
 

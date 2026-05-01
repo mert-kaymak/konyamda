@@ -368,12 +368,12 @@ function FilterContent({
 function ExperienceCard({ exp }: { exp: Experience }) {
   return (
     <Link href={`/deneyimler/${exp.slug}`} className="group block">
-      <div className="rounded-2xl border border-gray-100 overflow-hidden bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+      <div className="rounded-lg border border-gray-100 overflow-hidden bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
         {/* Resim alanı */}
         <div className={`relative aspect-[4/3] bg-gradient-to-br ${exp.gradient}`}>
           {exp.isFeatured && (
             <Badge className="absolute top-3 left-3 bg-white/25 text-white border-white/30 text-xs backdrop-blur-sm">
-              ⭐ Öne Çıkan
+              Öne Çıkan
             </Badge>
           )}
           <Badge className="absolute bottom-3 left-3 bg-black/30 text-white border-0 text-xs backdrop-blur-sm">
@@ -525,7 +525,7 @@ export default function ExperiencesPage() {
           <div className="flex gap-8">
             {/* ── Masaüstü Filtre Paneli ── */}
             <aside className="hidden md:block w-64 shrink-0">
-              <div className="sticky top-24 bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <div className="sticky top-24 bg-white rounded-lg border border-gray-100 shadow-sm p-5">
                 <div className="flex items-center gap-2 mb-5">
                   <Filter className="h-4 w-4 text-[#7B2D35]" />
                   <h2 className="font-semibold text-gray-900">Filtreler</h2>

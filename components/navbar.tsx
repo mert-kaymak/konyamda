@@ -20,7 +20,7 @@ export default function Navbar() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link href="/" className="text-xl font-bold text-[#7B2D35]">
-          KonyamDa
+          konyamda
         </Link>
 
         {/* Desktop Nav - ortada */}
@@ -61,7 +61,7 @@ export default function Navbar() {
                   className="text-xl font-bold text-[#7B2D35]"
                   onClick={() => setOpen(false)}
                 >
-                  KonyamDa
+                  konyamda
                 </Link>
               </div>
               <nav className="flex flex-col p-6 gap-1 flex-1">

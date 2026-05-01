@@ -364,7 +364,7 @@ export default function DashboardClient({
       <header className="sticky top-0 z-10 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-4xl mx-auto flex h-16 items-center justify-between px-4">
           <Link href="/" className="text-xl font-bold text-[#7B2D35]">
-            KonyamDa
+            konyamda
           </Link>
 
           <DropdownMenu>
@@ -411,8 +411,8 @@ export default function DashboardClient({
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-4xl mx-auto px-4">
           <div className="pt-6 pb-0">
-            <h1 className="text-2xl font-bold text-gray-900">
-              Hoş geldin, {profile.full_name?.split(" ")[0] ?? "kullanıcı"} 👋
+            <h1 className="text-2xl font-bold text-[#1a1a1a]">
+              Hoş geldin, {profile.full_name?.split(" ")[0] ?? "kullanıcı"}
             </h1>
             <p className="text-sm text-gray-500 mt-1 mb-4">
               Rezervasyonlarını takip et ve profilini düzenle.
@@ -486,7 +486,7 @@ export default function DashboardClient({
         {activeTab === "profil" && (
           <div className="max-w-lg">
             {/* Avatar */}
-            <div className="flex items-center gap-4 mb-8 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
+            <div className="flex items-center gap-4 mb-8 p-5 bg-white rounded-lg border border-gray-100 shadow-sm">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#7B2D35] text-white text-xl font-bold shrink-0">
                 {initials}
               </div>
@@ -504,7 +504,7 @@ export default function DashboardClient({
             </div>
 
             {/* Form */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
+            <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-6 space-y-5">
               <h2 className="text-base font-semibold text-gray-900">Kişisel Bilgiler</h2>
 
               {profileError && (

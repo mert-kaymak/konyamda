@@ -89,7 +89,7 @@ export default function LoginPage() {
       {/* Mobilde görünen logo */}
       <div className="lg:hidden text-center">
         <Link href="/" className="text-2xl font-bold text-[#7B2D35]">
-          KonyamDa
+          konyamda
         </Link>
       </div>
 

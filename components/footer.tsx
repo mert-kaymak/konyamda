@@ -27,7 +27,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
             <Link href="/" className="text-xl font-bold text-[#f0c4c8]">
-              KonyamDa
+              konyamda
             </Link>
             <p className="mt-3 text-sm text-gray-400 leading-relaxed">
               Konya&apos;nın benzersiz deneyimlerini keşfedin. Yerel
@@ -84,8 +84,8 @@ export default function Footer() {
         <Separator className="my-8 bg-gray-700" />
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <p>© 2025 KonyamDa. Tüm hakları saklıdır.</p>
-          <p>Konya&apos;nın kalbinden, dünyaya 🕌</p>
+          <p>© 2025 konyamda. Tüm hakları saklıdır.</p>
+          <p>Konya&apos;nın kalbinden, dünyaya.</p>
         </div>
       </div>
     </footer>

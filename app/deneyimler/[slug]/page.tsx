@@ -40,11 +40,11 @@ const EXPERIENCE = {
   isFeatured: true,
 
   images: [
-    { id: 1, gradient: "from-[#7B2D35] via-[#5C1F27] to-[#3D1219]", label: "Müze Girişi" },
-    { id: 2, gradient: "from-[#4c1d95] via-[#3b0764] to-[#1e1b4b]", label: "Türbe" },
-    { id: 3, gradient: "from-[#0c4a6e] via-[#075985] to-[#082f49]", label: "Çini Köşk" },
-    { id: 4, gradient: "from-[#713f12] via-[#92400e] to-[#3d1f06]", label: "Bahçe" },
-    { id: 5, gradient: "from-[#1a472a] via-[#14532d] to-[#0d2515]", label: "Semazenhane" },
+    { id: 1, gradient: "from-[#7B2D35] to-[#5C1F27]", label: "Müze Girişi" },
+    { id: 2, gradient: "from-[#4c1d95] to-[#1e1b4b]", label: "Türbe" },
+    { id: 3, gradient: "from-[#0c4a6e] to-[#082f49]", label: "Çini Köşk" },
+    { id: 4, gradient: "from-[#713f12] to-[#3d1f06]", label: "Bahçe" },
+    { id: 5, gradient: "from-[#1a472a] to-[#0d2515]", label: "Semazenhane" },
   ],
 
   description: `Konya'nın kalbinde, 13. yüzyılın mistik atmosferini teneffüs edeceğiniz bu özel turda deneyimli rehberimiz eşliğinde Mevlana Türbesi ve Müzesi'ni keşfedeceksiniz.
@@ -131,7 +131,7 @@ function ImageGallery({
   return (
     <div className="space-y-2">
       <div
-        className={`w-full h-80 md:h-[420px] rounded-2xl bg-gradient-to-br ${active.gradient} transition-all duration-500 relative overflow-hidden`}
+        className={`w-full h-80 md:h-[420px] rounded-lg bg-gradient-to-br ${active.gradient} transition-all duration-500 relative overflow-hidden`}
       >
         <div className="absolute inset-0 bg-black/10" />
         <span className="absolute bottom-4 left-4 text-white/70 text-sm font-medium">
@@ -146,7 +146,7 @@ function ImageGallery({
           <button
             key={img.id}
             onClick={() => onSelect(img.id)}
-            className={`flex-1 h-16 rounded-xl bg-gradient-to-br ${img.gradient} transition-all duration-200 relative overflow-hidden
+            className={`flex-1 h-16 rounded-lg bg-gradient-to-br ${img.gradient} transition-all duration-200 relative overflow-hidden
               ${activeId === img.id ? "ring-2 ring-[#7B2D35] ring-offset-2 opacity-100" : "opacity-60 hover:opacity-85"}`}
           />
         ))}
@@ -164,7 +164,7 @@ function BookingCard({ price }: { price: number }) {
   const total = price * participants
 
   return (
-    <div className="rounded-2xl border border-gray-100 shadow-lg bg-white p-6 space-y-5">
+    <div className="rounded-lg border border-gray-100 shadow-lg bg-white p-6 space-y-5">
       {/* Fiyat */}
       <div className="flex items-end gap-2">
         <span className="text-3xl font-bold text-gray-900">₺{price}</span>
@@ -250,7 +250,7 @@ function BookingCard({ price }: { price: number }) {
 
       {/* CTA Butonu */}
       <Button
-        className="w-full h-12 text-base font-semibold bg-[#7B2D35] hover:bg-[#6a2630] text-white rounded-xl shadow-md"
+        className="w-full h-12 text-base font-semibold bg-[#7B2D35] hover:bg-[#6a2630] text-white rounded-lg shadow-md"
         disabled={!selectedDate}
       >
         {selectedDate ? "Rezervasyon Talebi Gönder" : "Önce Tarih Seçin"}
@@ -315,7 +315,7 @@ export default function ExperienceDetailPage() {
                   </Badge>
                   {exp.isFeatured && (
                     <Badge className="bg-amber-50 text-amber-700 border-amber-200">
-                      ⭐ Öne Çıkan
+                      Öne Çıkan
                     </Badge>
                   )}
                 </div>
