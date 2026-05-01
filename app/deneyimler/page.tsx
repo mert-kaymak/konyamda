@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useEffect } from "react"
+import { Suspense, useState, useMemo, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
@@ -434,7 +434,7 @@ function ExperienceCard({ exp }: { exp: Experience }) {
   )
 }
 
-export default function ExperiencesPage() {
+function ExperiencesContent() {
   const searchParams = useSearchParams()
 
   const qParam = searchParams.get("q") ?? ""
@@ -621,5 +621,17 @@ export default function ExperiencesPage() {
 
       <Footer />
     </div>
+  )
+}
+
+export default function ExperiencesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="h-8 w-8 border-4 border-[#7B2D35] border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <ExperiencesContent />
+    </Suspense>
   )
 }
