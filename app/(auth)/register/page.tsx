@@ -84,16 +84,9 @@ export default function RegisterPage() {
     setLoading(true)
     const supabase = createClient()
 
-    const { data, error: signUpError } = await supabase.auth.signUp({
+    const { error: signUpError } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
-        data: {
-          full_name: fullName,
-          is_organizer: isOrganizer,
-        },
-      },
     })
 
     if (signUpError) {
@@ -102,25 +95,8 @@ export default function RegisterPage() {
       return
     }
 
-    // Oturum varsa (e-posta doğrulama kapalı) profili güncelle
-    if (data.session && data.user) {
-      if (isOrganizer) {
-        await supabase
-          .from("profiles")
-          .update({ is_organizer: true, full_name: fullName })
-          .eq("id", data.user.id)
-      }
-      router.push("/")
-      router.refresh()
-      return
-    }
-
-    // E-posta doğrulama açık → bilgilendirme mesajı göster
-    setSuccess(
-      "Hesabınız oluşturuldu! " +
-      "E-posta adresinize gönderilen doğrulama linkine tıklayarak hesabınızı aktif edin."
-    )
-    setLoading(false)
+    router.push("/")
+    router.refresh()
   }
 
   if (success) {
