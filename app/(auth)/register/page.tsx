@@ -109,7 +109,7 @@ export default function RegisterPage() {
           .update({ is_organizer: true, full_name: fullName })
           .eq("id", data.user.id)
       }
-      router.push("/dashboard")
+      router.push("/")
       router.refresh()
       return
     }
