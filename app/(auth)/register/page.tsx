@@ -88,6 +88,7 @@ export default function RegisterPage() {
       email,
       password,
       options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
         data: {
           full_name: fullName,
           is_organizer: isOrganizer,
