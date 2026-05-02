@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { Separator } from "@/components/ui/separator"
@@ -5,25 +6,25 @@ import { MapPin, Mail, Phone, Heart, Target, Users } from "lucide-react"
 
 const team = [
   {
-    initials: "ZA",
-    name: "Zeynep Arslan",
+    name: "Mert Kaymak",
     title: "Kurucu & CEO",
-    bio: "Konya'da doğup büyüdü. Turizm ve deneyim ekonomisi alanında 8 yıllık geçmişiyle konyamda'nın temelini attı.",
-    color: "bg-[#7B2D35]",
+    bio: "Konya'da doğup büyüdü. Turizm ve deneyim ekonomisi alanındaki vizyonuyla konyamda'nın temelini attı.",
+    image: "/mert.jpg.png",
+    initials: "MK",
   },
   {
-    initials: "MC",
-    name: "Mehmet Çelik",
-    title: "Operasyon Direktörü",
-    bio: "Otelcilik ve etkinlik yönetimi mezunu. Organizatörlerle ilişkileri koordine eder, platform kalitesini denetler.",
-    color: "bg-[#92400e]",
+    name: "Ahmet Alperen Arslan",
+    title: "Kurucu Ortak & CTO",
+    bio: "Yazılım geliştirme ve ürün tasarımı konusundaki uzmanlığıyla platformun teknik altyapısını inşa etti.",
+    image: "/ahmet.jpg.jpeg",
+    initials: "AA",
   },
   {
-    initials: "AK",
-    name: "Ayşe Karakaş",
-    title: "Topluluk Yöneticisi",
-    bio: "Konya'nın kültürel mirasını dijital dünyaya taşıma tutkusuyla platforma katılan yerel tarih rehberi.",
-    color: "bg-[#1a472a]",
+    name: "Toygun Galyan",
+    title: "Kurucu Ortak & CMO",
+    bio: "Pazarlama ve topluluk yönetimindeki deneyimiyle konyamda'yı Konya'nın en tanınan deneyim platformu haline getiriyor.",
+    image: "/toygun.jpg.jpeg",
+    initials: "TG",
   },
 ]
 
@@ -61,7 +62,7 @@ export default function HakkimizdaPage() {
               Konya&apos;yı yaşatan platform
             </h1>
             <p className="text-white/75 text-lg leading-relaxed">
-              konyamda, 2024 yılında Konya&apos;nın eşsiz kültürünü, mutfağını ve insanını
+              konyamda, 2026 yılında Konya&apos;nın eşsiz kültürünü, mutfağını ve insanını
               dünyayla buluşturmak için kuruldu.
             </p>
           </div>
@@ -131,10 +132,14 @@ export default function HakkimizdaPage() {
                   key={member.name}
                   className="bg-white rounded-lg border border-gray-200 p-6 text-center shadow-sm"
                 >
-                  <div
-                    className={`${member.color} h-16 w-16 rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto mb-4`}
-                  >
-                    {member.initials}
+                  <div className="relative h-20 w-20 rounded-full overflow-hidden mx-auto mb-4 bg-gray-100">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                      sizes="80px"
+                    />
                   </div>
                   <h3 className="font-semibold text-[#1a1a1a]">{member.name}</h3>
                   <p className="text-sm text-[#7B2D35] font-medium mt-0.5 mb-3">{member.title}</p>
@@ -156,7 +161,7 @@ export default function HakkimizdaPage() {
               <div className="flex flex-col items-center gap-2 p-5 bg-[#F5F0E8] rounded-lg">
                 <Mail className="h-5 w-5 text-[#7B2D35]" />
                 <p className="text-sm font-medium text-[#1a1a1a]">E-posta</p>
-                <p className="text-sm text-gray-500">merhaba@konyamda.com</p>
+                <p className="text-sm text-gray-500">iletisim.konyamda@gmail.com</p>
               </div>
               <div className="flex flex-col items-center gap-2 p-5 bg-[#F5F0E8] rounded-lg">
                 <Phone className="h-5 w-5 text-[#7B2D35]" />

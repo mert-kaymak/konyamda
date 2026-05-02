@@ -12,8 +12,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: "E-posta",
-    value: "merhaba@konyamda.com",
-    href: "mailto:merhaba@konyamda.com",
+    value: "iletisim.konyamda@gmail.com",
+    href: "mailto:iletisim.konyamda@gmail.com",
   },
   {
     icon: Phone,
@@ -35,6 +35,9 @@ export default function IletisimPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    const subject = encodeURIComponent(`konyamda - ${form.name} mesajı`)
+    const body = encodeURIComponent(`Ad Soyad: ${form.name}\nE-posta: ${form.email}\n\nMesaj:\n${form.message}`)
+    window.location.href = `mailto:iletisim.konyamda@gmail.com?subject=${subject}&body=${body}`
     setSent(true)
   }
 

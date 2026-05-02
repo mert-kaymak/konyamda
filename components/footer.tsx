@@ -84,7 +84,7 @@ export default function Footer() {
         <Separator className="my-8 bg-gray-700" />
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <p>© 2025 konyamda. Tüm hakları saklıdır.</p>
+          <p>© 2026 konyamda. Tüm hakları saklıdır.</p>
           <p>Konya&apos;nın kalbinden, dünyaya.</p>
         </div>
       </div>
