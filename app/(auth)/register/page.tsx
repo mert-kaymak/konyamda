@@ -3,7 +3,10 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { createClient } from "@/lib/supabase/client"
+import { createClient } from "@supabase/supabase-js"
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
@@ -82,7 +85,7 @@ export default function RegisterPage() {
     }
 
     setLoading(true)
-    const supabase = createClient()
+    const supabase = createClient(supabaseUrl, supabaseKey)
 
     const { error: signUpError } = await supabase.auth.signUp({
       email,
