@@ -72,6 +72,7 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [user, setUser] = useState<User | null>(null)
+  const [isOrganizer, setIsOrganizer] = useState(false)
   const [ready, setReady] = useState(false)
   const [showPopup, setShowPopup] = useState(false)
   const router = useRouter()
@@ -79,13 +80,28 @@ export default function Navbar() {
   useEffect(() => {
     const supabase = createClient()
 
+    async function loadUser(userId: string) {
+      const { data } = await supabase
+        .from("profiles")
+        .select("is_organizer")
+        .eq("id", userId)
+        .single()
+      setIsOrganizer(data?.is_organizer ?? false)
+    }
+
     supabase.auth.getUser().then(({ data: { user } }) => {
       setUser(user)
+      if (user) loadUser(user.id)
       setReady(true)
     })
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
+      if (session?.user) {
+        loadUser(session.user.id)
+      } else {
+        setIsOrganizer(false)
+      }
       setReady(true)
     })
 
@@ -160,6 +176,19 @@ export default function Navbar() {
                 <span className="text-sm font-medium text-gray-700 truncate max-w-[100px]">
                   {displayName}
                 </span>
+                {isOrganizer && (
+                  <Button
+                    asChild
+                    variant="ghost"
+                    size="sm"
+                    className="text-[#7B2D35] hover:bg-[#7B2D35]/10"
+                  >
+                    <Link href="/organizator">
+                      <LayoutDashboard className="h-4 w-4 mr-1.5" />
+                      Organizatör
+                    </Link>
+                  </Button>
+                )}
                 <Button
                   asChild
                   variant="ghost"
@@ -233,6 +262,15 @@ export default function Navbar() {
                     {link.label}
                   </Link>
                 ))}
+                {ready && user && isOrganizer && (
+                  <Link
+                    href="/organizator"
+                    className="px-3 py-2.5 text-base font-medium text-[#7B2D35] hover:bg-[#7B2D35]/5 rounded-lg transition-colors"
+                    onClick={() => setOpen(false)}
+                  >
+                    Organizatör Paneli
+                  </Link>
+                )}
                 {ready && user && (
                   <Link
                     href="/dashboard"
