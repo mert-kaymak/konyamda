@@ -10,8 +10,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { AlertCircle, CheckCircle2, Eye, EyeOff, Loader2 } from "lucide-react"
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const supabaseUrl = (process.env.NEXT_PUBLIC_SUPABASE_URL || "")
+  .replace(/\/(rest|auth|storage|realtime)(\/.*)?$/, "")
+  .replace(/\/$/, "")
 
 function toTurkish(msg: string): string {
   const map: Record<string, string> = {
