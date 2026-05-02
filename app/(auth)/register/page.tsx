@@ -87,6 +87,7 @@ export default function RegisterPage() {
     setLoading(true)
     const supabase = createClient(supabaseUrl, supabaseKey)
 
+    console.log('Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL)
     console.log('SignUp çağrısı yapılıyor:', { email })
 
     const { error: signUpError } = await supabase.auth.signUp({
