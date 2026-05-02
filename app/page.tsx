@@ -131,7 +131,7 @@ export default function HomePage() {
 
             <div className="mt-8 flex flex-wrap justify-center gap-2 text-sm text-white/60">
               <span>Popüler:</span>
-              {["Etli Ekmek Yapım Atölyesi", "Sille Köyü Fotoğraf Turu", "Sema Turu"].map((t) => (
+              {["Etli Ekmek Yapım Atölyesi", "Sille Köyü Fotoğraf Turu", "Geleneksel Çini Boyama Atölyesi"].map((t) => (
                 <Link
                   key={t}
                   href={`/deneyimler?q=${encodeURIComponent(t)}`}
