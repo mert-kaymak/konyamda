@@ -5,13 +5,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import {
-  Baby,
-  CalendarDays,
+  Camera,
   Clock,
   Landmark,
-  Leaf,
   MapPin,
-  Moon,
   Mountain,
   Palette,
   Search,
@@ -24,14 +21,11 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 
 const categories: { icon: LucideIcon; label: string; slug: string }[] = [
-  { icon: Moon, label: "Mevlana & Tasavvuf", slug: "mevlana-tasavvuf" },
-  { icon: UtensilsCrossed, label: "Konya Mutfağı", slug: "konya-mutfagi" },
-  { icon: Mountain, label: "Doğa & Macera", slug: "doga-macera" },
+  { icon: UtensilsCrossed, label: "Yemek & Mutfak", slug: "yemek-mutfak" },
+  { icon: Camera, label: "Fotoğrafçılık & Sanat", slug: "fotografcilik-sanat" },
   { icon: Palette, label: "Sanat & El Sanatları", slug: "sanat-el-sanatlari" },
+  { icon: Mountain, label: "Doğa & Macera", slug: "doga-macera" },
   { icon: Landmark, label: "Kültür & Tarih", slug: "kultur-tarih" },
-  { icon: Leaf, label: "Wellness & Yoga", slug: "wellness-yoga" },
-  { icon: Baby, label: "Çocuklar İçin", slug: "cocuklar-icin" },
-  { icon: CalendarDays, label: "Özel Etkinlikler", slug: "ozel-etkinlikler" },
 ]
 
 const featured = [
@@ -137,7 +131,7 @@ export default function HomePage() {
 
             <div className="mt-8 flex flex-wrap justify-center gap-2 text-sm text-white/60">
               <span>Popüler:</span>
-              {["Mevlana Turu", "Etli Ekmek", "Sema Gösterisi", "Fotoğraf Turu"].map((t) => (
+              {["Etli Ekmek Atölyesi", "Sille Turu", "Beyşehir Gölü", "Çini Boyama", "Doğa Yürüyüşü", "Sema Turu"].map((t) => (
                 <Link
                   key={t}
                   href={`/deneyimler?q=${encodeURIComponent(t)}`}
@@ -202,8 +196,13 @@ export default function HomePage() {
               {featured.map((exp) => (
                 <Card
                   key={exp.id}
-                  className="overflow-hidden hover:shadow-xl transition-all duration-300 group border-gray-200 rounded-lg"
+                  className="overflow-hidden hover:shadow-xl transition-all duration-300 group border-gray-200 rounded-lg relative cursor-pointer"
                 >
+                  <Link
+                    href={`/deneyimler/${exp.slug}`}
+                    className="absolute inset-0 z-0"
+                    aria-label={exp.title}
+                  />
                   <div className="relative h-52 overflow-hidden">
                     <Image
                       src={exp.image}
@@ -257,13 +256,12 @@ export default function HomePage() {
                           <span className="text-sm font-normal text-gray-500"> / kişi</span>
                         </p>
                       </div>
-                      <Button
-                        asChild
-                        size="sm"
-                        className="bg-[#7B2D35] hover:bg-[#6a2630] text-white rounded-lg"
+                      <Link
+                        href={`/deneyimler/${exp.slug}`}
+                        className="relative z-10 inline-flex items-center justify-center rounded-lg bg-[#7B2D35] hover:bg-[#6a2630] px-3 py-1.5 text-sm font-medium text-white transition-colors"
                       >
-                        <Link href={`/deneyimler/${exp.slug}`}>Rezerve Et</Link>
-                      </Button>
+                        Rezerve Et
+                      </Link>
                     </div>
                   </CardContent>
                 </Card>

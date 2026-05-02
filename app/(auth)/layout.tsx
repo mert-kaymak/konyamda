@@ -32,7 +32,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         </div>
 
         <p className="text-white/30 text-xs relative z-10">
-          © 2025 konyamda
+          © 2026 konyamda
         </p>
       </div>
 
