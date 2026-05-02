@@ -476,7 +476,7 @@ function BookingCard({
       return
     }
 
-    const { error } = await supabase.from("bookings").insert({
+    const payload = {
       experience_slug: experienceSlug,
       experience_title: experienceTitle,
       user_id: user.id,
@@ -484,11 +484,18 @@ function BookingCard({
       booking_date: selectedDate.toISOString().split("T")[0],
       total_price: total,
       status: "pending",
-    })
+    }
+
+    console.log("Rezervasyon payload:", payload)
+
+    const { data, error } = await supabase.from("bookings").insert(payload).select()
+
+    console.log("Rezervasyon hatası:", error)
+    console.log("Rezervasyon data:", data)
 
     if (error) {
       setStatus("error")
-      setErrorMsg("Rezervasyon kaydedilemedi. Lütfen tekrar deneyin.")
+      setErrorMsg(`Rezervasyon kaydedilemedi: ${error.message}`)
     } else {
       setStatus("success")
     }

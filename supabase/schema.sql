@@ -113,11 +113,24 @@ create table if not exists public.bookings (
   created_at        timestamptz not null default now()
 );
 
--- Mevcut tablo için migration (Supabase Dashboard > SQL Editor'de çalıştırın):
+-- ============================================================
+-- MIGRATION — Mevcut DB için Supabase SQL Editor'de çalıştırın
+-- ============================================================
 -- ALTER TABLE public.bookings
 --   ALTER COLUMN experience_id DROP NOT NULL,
 --   ADD COLUMN IF NOT EXISTS experience_slug text,
 --   ADD COLUMN IF NOT EXISTS experience_title text;
+--
+-- -- RLS policy'ler eksikse ekle:
+-- DROP POLICY IF EXISTS "Giriş yapmış kullanıcı rezervasyon oluşturabilir" ON public.bookings;
+-- CREATE POLICY "Giriş yapmış kullanıcı rezervasyon oluşturabilir"
+--   ON public.bookings FOR INSERT
+--   WITH CHECK (auth.uid() = user_id);
+--
+-- DROP POLICY IF EXISTS "Kullanıcı kendi rezervasyonlarını görebilir" ON public.bookings;
+-- CREATE POLICY "Kullanıcı kendi rezervasyonlarını görebilir"
+--   ON public.bookings FOR SELECT
+--   USING (auth.uid() = user_id);
 
 create index if not exists bookings_user_idx       on public.bookings (user_id);
 create index if not exists bookings_experience_idx on public.bookings (experience_id);
