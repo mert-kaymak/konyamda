@@ -379,6 +379,10 @@ function ExperienceCard({ exp }: { exp: Experience }) {
 function ExperiencesContent() {
   const searchParams = useSearchParams()
 
+  useEffect(() => {
+    document.title = "Tüm Deneyimler | konyamda"
+  }, [])
+
   const qParam = searchParams.get("q") ?? ""
   const kategoriParam = searchParams.get("kategori") ?? ""
 
@@ -566,13 +570,45 @@ function ExperiencesContent() {
   )
 }
 
+function SkeletonLoader() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-1 bg-gray-50">
+        <div className="bg-white border-b">
+          <div className="container mx-auto px-4 py-6 space-y-4">
+            <div className="h-8 w-36 bg-gray-200 rounded animate-pulse" />
+            <div className="h-4 w-52 bg-gray-100 rounded animate-pulse" />
+            <div className="h-10 w-full max-w-lg bg-gray-100 rounded animate-pulse" />
+          </div>
+        </div>
+        <div className="container mx-auto px-4 py-8">
+          <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="rounded-lg border border-gray-100 overflow-hidden bg-white">
+                <div className="aspect-[4/3] bg-gray-200 animate-pulse" />
+                <div className="p-4 space-y-3">
+                  <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                  <div className="h-4 bg-gray-100 rounded animate-pulse w-3/4" />
+                  <div className="h-3 bg-gray-100 rounded animate-pulse w-1/2" />
+                  <div className="flex justify-between items-center pt-1">
+                    <div className="h-6 w-16 bg-gray-200 rounded animate-pulse" />
+                    <div className="h-8 w-20 bg-gray-200 rounded animate-pulse" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
 export default function ExperiencesPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="h-8 w-8 border-4 border-[#7B2D35] border-t-transparent rounded-full animate-spin" />
-      </div>
-    }>
+    <Suspense fallback={<SkeletonLoader />}>
       <ExperiencesContent />
     </Suspense>
   )

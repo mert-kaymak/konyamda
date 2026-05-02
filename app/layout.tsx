@@ -9,8 +9,11 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "konyamda — Konya'nın En Güzel Deneyimleri",
-  description: "Konya'da atölyeler, turlar ve aktivitelerle unutulmaz anılar biriktir.",
+  title: "konyamda — Konya'nın Deneyim Platformu",
+  description: "Konya'daki atölyeleri, turları ve aktiviteleri keşfet. Etli ekmek atölyesinden sema törenine, doğa yürüyüşünden fotoğraf turuna kadar unutulmaz Konya deneyimleri.",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({

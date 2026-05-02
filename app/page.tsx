@@ -110,7 +110,7 @@ export default function HomePage() {
             <form
               action="/deneyimler"
               method="GET"
-              className="flex gap-3 max-w-2xl mx-auto"
+              className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto"
             >
               <div className="relative flex-1">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -123,7 +123,7 @@ export default function HomePage() {
               <Button
                 type="submit"
                 size="lg"
-                className="h-14 px-8 bg-[#f0c4c8] hover:bg-[#e8b0b5] text-[#7B2D35] font-semibold rounded-lg shadow-xl shrink-0"
+                className="h-14 px-8 bg-[#f0c4c8] hover:bg-[#e8b0b5] text-[#7B2D35] font-semibold rounded-lg shadow-xl w-full sm:w-auto shrink-0"
               >
                 Ara
               </Button>

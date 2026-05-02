@@ -623,7 +623,7 @@ function BookingCard({
         onClick={handleBooking}
       >
         {status === "loading" ? (
-          <Loader2 className="h-5 w-5 animate-spin" />
+          <><Loader2 className="h-5 w-5 animate-spin mr-2" />Gönderiliyor...</>
         ) : selectedDate ? (
           "Rezervasyon Talebi Gönder"
         ) : (

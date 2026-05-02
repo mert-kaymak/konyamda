@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { createClient } from "@supabase/supabase-js"
@@ -17,7 +17,7 @@ const supabaseUrl = (process.env.NEXT_PUBLIC_SUPABASE_URL || "")
 
 function toTurkish(msg: string): string {
   const map: Record<string, string> = {
-    "User already registered": "Bu e-posta adresi zaten kayıtlı.",
+    "User already registered": "Bu email zaten kayıtlı.",
     "Password should be at least 6 characters": "Şifre en az 6 karakter olmalıdır.",
     "Unable to validate email address: invalid format": "Geçersiz e-posta adresi.",
     "Signup is disabled": "Kayıt şu an kapalı.",
@@ -61,6 +61,11 @@ function PasswordStrength({ password }: { password: string }) {
 
 export default function RegisterPage() {
   const router = useRouter()
+
+  useEffect(() => {
+    document.title = "Kayıt Ol | konyamda"
+  }, [])
+
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
@@ -11,7 +11,7 @@ import { Eye, EyeOff, Loader2, AlertCircle } from "lucide-react"
 
 function toTurkish(msg: string): string {
   const map: Record<string, string> = {
-    "Invalid login credentials": "E-posta veya şifre hatalı.",
+    "Invalid login credentials": "Email veya şifre hatalı.",
     "Email not confirmed": "E-posta adresinizi doğrulamanız gerekiyor.",
     "Too many requests": "Çok fazla deneme yapıldı. Lütfen bekleyin.",
     "User not found": "Bu e-posta adresiyle kayıtlı kullanıcı bulunamadı.",
@@ -22,6 +22,11 @@ function toTurkish(msg: string): string {
 
 export default function LoginPage() {
   const router = useRouter()
+
+  useEffect(() => {
+    document.title = "Giriş Yap | konyamda"
+  }, [])
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)

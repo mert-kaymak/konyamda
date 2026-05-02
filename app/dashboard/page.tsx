@@ -1,5 +1,8 @@
+import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
+
+export const metadata: Metadata = { title: "Panelim | konyamda" }
 import DashboardClient from "./_components/DashboardClient"
 
 export default async function DashboardPage() {
