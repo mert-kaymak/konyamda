@@ -73,7 +73,7 @@ const DETAILS: Record<string, ExperienceDetail> = {
       { id: 1, url: "https://plus.unsplash.com/premium_photo-1664475030299-590e428e77c0?w=1200&q=85", label: "Müze Girişi" },
       { id: 2, url: "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&q=85", label: "Türbe" },
       { id: 3, url: "https://images.unsplash.com/photo-1518899150575-5ac29fbe2f3e?w=1200&q=85", label: "Çini Köşk" },
-      { id: 4, url: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=1200&q=85", label: "Bahçe" },
+      { id: 4, url: "https://images.unsplash.com/photo-Hw9wHGvGZdE?w=1200&q=85", label: "Yeşil Kubbe" },
       { id: 5, url: "https://images.unsplash.com/photo-1529060256154-8dca470c3325?w=1200&q=85", label: "Semazenhane" },
     ],
     description: `Hz. Mevlana'nın yeşil kubbesinin altında, 13. yüzyıldan kalma el yazmalarını, Sema kostümlerini ve nadide Selçuklu eserlerini uzman tarih rehberi eşliğinde keşfedin. Müzenin semahane, dervişane ve mutfak bölümlerini gezerken Mevlevi kültürünün 800 yıllık derinliğine ineceksiniz.
@@ -124,11 +124,11 @@ Tur sonunda müzenin dijital rehber kitapçığı e-posta ile gönderilecektir.`
     maxParticipants: 15,
     isFeatured: true,
     images: [
-      { id: 1, url: "https://images.unsplash.com/photo-1529060256154-8dca470c3325?w=1200&q=85", label: "Sema Töreni" },
-      { id: 2, url: "https://plus.unsplash.com/premium_photo-1681053901938-a54612206f97?w=1200&q=85", label: "Ney Müziği" },
-      { id: 3, url: "https://images.unsplash.com/photo-1518899150575-5ac29fbe2f3e?w=1200&q=85", label: "Semazenhane" },
-      { id: 4, url: "https://plus.unsplash.com/premium_photo-1664475030299-590e428e77c0?w=1200&q=85", label: "Tören Atmosferi" },
-      { id: 5, url: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=1200&q=85", label: "Konya Gecesi" },
+      { id: 1, url: "https://images.unsplash.com/photo--hp5d9O3MEk?w=1200&q=85", label: "Sema Töreni" },
+      { id: 2, url: "https://images.unsplash.com/photo-v6gfZmFMpt4?w=1200&q=85", label: "Semazenhane" },
+      { id: 3, url: "https://images.unsplash.com/photo-3a1MNMRdxaA?w=1200&q=85", label: "Dönen Dervişler" },
+      { id: 4, url: "https://images.unsplash.com/photo-Je0M8I4O2qU?w=1200&q=85", label: "Ruhani Atmosfer" },
+      { id: 5, url: "https://images.unsplash.com/photo-SqQ9btOnu-E?w=1200&q=85", label: "Tören Anı" },
     ],
     description: `UNESCO Somut Olmayan Kültürel Miras listesindeki Mevlevi Sema törenini özel ve samimi bir ortamda, kalabalık turistlerden uzak izleyin. Beyaz tennureler içinde dönen semazenlerin her hareketi Mevlana'nın felsefesindeki ölüm, aşk ve yeniden doğuşu sembolize eder.
 
@@ -177,11 +177,11 @@ Tören bitiminde rehberimizle soru-cevap seansı yapılacak, çay ikram edilecek
     maxParticipants: 12,
     isFeatured: true,
     images: [
-      { id: 1, url: "https://images.unsplash.com/photo-1632158930341-46604b637a0f?w=1200&q=85", label: "Atölye" },
-      { id: 2, url: "https://images.unsplash.com/photo-1759736859407-a676ed566968?w=1200&q=85", label: "Malzemeler" },
-      { id: 3, url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=85", label: "Hamur" },
-      { id: 4, url: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=1200&q=85", label: "Fırın" },
-      { id: 5, url: "https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=1200&q=85", label: "Sonuç" },
+      { id: 1, url: "https://images.unsplash.com/photo-I0ha_pMquU4?w=1200&q=85", label: "Geleneksel Fırın" },
+      { id: 2, url: "https://images.unsplash.com/photo-bPqMD7uSrJg?w=1200&q=85", label: "Hamur Yoğurma" },
+      { id: 3, url: "https://images.unsplash.com/photo-tCPk4-sHSkY?w=1200&q=85", label: "Hazırlık" },
+      { id: 4, url: "https://images.unsplash.com/photo-s4lvaXKUyxU?w=1200&q=85", label: "Şekillendirme" },
+      { id: 5, url: "https://images.unsplash.com/photo-MNIY0kO-lAw?w=1200&q=85", label: "Sıcak Ekmek" },
     ],
     description: `Konya'nın tescilli coğrafi işaretli lezzeti ve şehrin sembolü etli ekmeği, geleneksel taş fırında usta şef rehberliğinde baştan sona kendiniz yapın. Un seçiminden hamur yoğurmaya, iç harç hazırlamaktan fırına sürmeye kadar her adımı bizzat deneyimleyeceksiniz.
 
@@ -232,7 +232,7 @@ Atölye sonunda kişiselleştirilmiş tarif kartı ve malzeme listesi hediye ola
       { id: 1, url: "https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&q=85", label: "Fırın Kebabı" },
       { id: 2, url: "https://images.unsplash.com/photo-1632158930341-46604b637a0f?w=1200&q=85", label: "Hazırlık" },
       { id: 3, url: "https://images.unsplash.com/photo-1759736859407-a676ed566968?w=1200&q=85", label: "Baharatlar" },
-      { id: 4, url: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=1200&q=85", label: "Taş Fırın" },
+      { id: 4, url: "https://images.unsplash.com/photo-9Lsxip60s20?w=1200&q=85", label: "Taş Fırın" },
       { id: 5, url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=85", label: "Servis" },
     ],
     description: `Konya mutfağının vazgeçilmez ikinci lezzeti fırın kebabını; kuzu etini seçmekten, tuz ve karabiber ile sadece ustalıkla hazırlamaya kadar tüm süreçte usta kebapçı rehberliğinde öğrenin. Geleneksel taş fırında saatlerce yavaşça pişen et, Konya'ya özgü tekniklerle hazırlanır.
@@ -284,7 +284,7 @@ Atölye, sabah hazırlık ve öğlen tadım şeklinde iki bölümden oluşmaktad
     images: [
       { id: 1, url: "https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=1200&q=85", label: "Kazı Alanı" },
       { id: 2, url: "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=1200&q=85", label: "Arkeolojik Bulgular" },
-      { id: 3, url: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=1200&q=85", label: "Alan Müzesi" },
+      { id: 3, url: "https://images.unsplash.com/photo-G7LWlDEg6hg?w=1200&q=85", label: "Alan Müzesi" },
       { id: 4, url: "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&q=85", label: "Sergi" },
       { id: 5, url: "https://plus.unsplash.com/premium_photo-1664475030299-590e428e77c0?w=1200&q=85", label: "Konya Ovası" },
     ],
@@ -334,7 +334,7 @@ Tur öncesi Konya merkez çıkışlı ulaşım dahildir.`,
     duration: "4 saat",
     maxParticipants: 10,
     images: [
-      { id: 1, url: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=1200&q=85", label: "Köy Girişi" },
+      { id: 1, url: "https://images.unsplash.com/photo-qAroWT1XMic?w=1200&q=85", label: "Köy Girişi" },
       { id: 2, url: "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=1200&q=85", label: "Kaya Kilisesi" },
       { id: 3, url: "https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=1200&q=85", label: "Tarihi Sokaklar" },
       { id: 4, url: "https://images.unsplash.com/photo-1529060256154-8dca470c3325?w=1200&q=85", label: "Eski Köprü" },
@@ -387,7 +387,7 @@ Sabah 07:00'de başlayan tur, gün içindeki en yumuşak doğal ışıkta çekim
     images: [
       { id: 1, url: "https://images.unsplash.com/photo-1764789998734-653c1370ab01?w=1200&q=85", label: "Beyşehir Gölü" },
       { id: 2, url: "https://images.unsplash.com/photo-1745670922388-cc34082bb8cb?w=1200&q=85", label: "Tekne" },
-      { id: 3, url: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=1200&q=85", label: "Şövalye Adası" },
+      { id: 3, url: "https://images.unsplash.com/photo-Z-Xqx6iax_k?w=1200&q=85", label: "Şövalye Adası" },
       { id: 4, url: "https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=1200&q=85", label: "Kubad Abad" },
       { id: 5, url: "https://plus.unsplash.com/premium_photo-1664475030299-590e428e77c0?w=1200&q=85", label: "Gün Batımı" },
     ],
@@ -442,7 +442,7 @@ Tura öğle yemeği ve Konya merkez - Beyşehir arası ulaşım dahildir.`,
       { id: 2, url: "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&q=85", label: "Motifler" },
       { id: 3, url: "https://images.unsplash.com/photo-1638310533874-6c124c012e1d?w=1200&q=85", label: "Boyama" },
       { id: 4, url: "https://plus.unsplash.com/premium_photo-1664475030299-590e428e77c0?w=1200&q=85", label: "Karatay Çinisi" },
-      { id: 5, url: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=1200&q=85", label: "Eserler" },
+      { id: 5, url: "https://images.unsplash.com/photo-H0l97Gy_PqA?w=1200&q=85", label: "Eserler" },
     ],
     description: `Karatay Medresesi'nin duvarlarını süsleyen turkuaz ve kobalt mavisi Selçuklu çinilerinden ilham alarak, usta çini sanatçısı eşliğinde geleneksel geometrik ve bitkisel motifleri kendi çini karonuza işleyin.
 
@@ -490,11 +490,11 @@ Boyanan çini karo pişirme sürecinden geçirilerek bir hafta içinde adresiniz
     duration: "2,5 saat",
     maxParticipants: 8,
     images: [
-      { id: 1, url: "https://images.unsplash.com/photo-1585297502780-9f8b5ca4ff13?w=1200&q=85", label: "Hat Sanatı" },
-      { id: 2, url: "https://images.unsplash.com/photo-1518899150575-5ac29fbe2f3e?w=1200&q=85", label: "Kalem ve Mürekkep" },
-      { id: 3, url: "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&q=85", label: "Motifler" },
-      { id: 4, url: "https://images.unsplash.com/photo-1638310533874-6c124c012e1d?w=1200&q=85", label: "Pratik" },
-      { id: 5, url: "https://plus.unsplash.com/premium_photo-1664475030299-590e428e77c0?w=1200&q=85", label: "Eserler" },
+      { id: 1, url: "https://images.unsplash.com/photo-n3rOsLFh2ZY?w=1200&q=85", label: "Hat Sanatı" },
+      { id: 2, url: "https://images.unsplash.com/photo-xa-4NdR5z1c?w=1200&q=85", label: "İslam Kaligrafi" },
+      { id: 3, url: "https://images.unsplash.com/photo-1sYWWe6Bgzw?w=1200&q=85", label: "Altın Yazı" },
+      { id: 4, url: "https://images.unsplash.com/photo-8tPuaW7L21M?w=1200&q=85", label: "Kalem Çalışması" },
+      { id: 5, url: "https://images.unsplash.com/photo-GXkCBYRtBOQ?w=1200&q=85", label: "Eserler" },
     ],
     description: `İslam medeniyetinin en köklü sanat formlarından hat sanatının temellerini, Konya'nın köklü hat geleneğinden gelen usta hattat eşliğinde öğrenin. Kamış kalem tutmaktan başlayarak Nesih ve Sülüs yazı stillerinde harfler, kelimeler ve kısa cümleler yazmayı pratik yapacaksınız.
 
@@ -546,7 +546,7 @@ Mevlana'nın şiirlerinden seçilmiş kısa bir beyiti kendi el yazınıza aktar
       { id: 2, url: "https://plus.unsplash.com/premium_photo-1664475030299-590e428e77c0?w=1200&q=85", label: "Medrese Girişi" },
       { id: 3, url: "https://images.unsplash.com/photo-1518899150575-5ac29fbe2f3e?w=1200&q=85", label: "Çini Koleksiyon" },
       { id: 4, url: "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=1200&q=85", label: "Taş İşleme" },
-      { id: 5, url: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=1200&q=85", label: "Avlu" },
+      { id: 5, url: "https://images.unsplash.com/photo-k_PC-oqarxo?w=1200&q=85", label: "Avlu" },
     ],
     description: `Anadolu Selçuklu Devleti döneminde 1251 yılında inşa edilen Karatay Medresesi, Türk-İslam mimarisinin en nadide örneklerinden biridir. Bugün Çini Eserler Müzesi olarak hizmet veren medresenin asıl büyüsü, türkuaz ve kobalt mavisi çinilerle döşeli nefes kesici 24 dilimli kubbesindedir.
 
@@ -597,7 +597,7 @@ Karatay Medresesi, Alaaddin Camii ve İnce Minareli Medrese'yi kapsayan üçlü 
       { id: 2, url: "https://plus.unsplash.com/premium_photo-1664475030299-590e428e77c0?w=1200&q=85", label: "Alaaddin Camii" },
       { id: 3, url: "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1200&q=85", label: "Sultan Türbeleri" },
       { id: 4, url: "https://images.unsplash.com/photo-1563991655280-cb95c90ca2fb?w=1200&q=85", label: "Selçuklu Köşkü" },
-      { id: 5, url: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=1200&q=85", label: "Konya Panoraması" },
+      { id: 5, url: "https://images.unsplash.com/photo-wh6JbIYKe3A?w=1200&q=85", label: "Konya Panoraması" },
     ],
     description: `Konya'nın tam kalbinde yükselen Alaaddin Tepesi, 12. yüzyıldan itibaren Anadolu Selçuklu Sultanlığı'nın merkezi olmuştur. Anadolu Selçuklularının sekiz sultanının mezarını barındıran Alaaddin Camii, 12. yüzyılda başlayıp 13. yüzyılda tamamlanan ve Anadolu'nun en eski camilerinden biridir.
 
@@ -647,7 +647,7 @@ Tur, Alaaddin Camii'nin iç mekanını ve türbeleri de kapsamaktadır.`,
       { id: 2, url: "https://images.unsplash.com/photo-1632158930341-46604b637a0f?w=1200&q=85", label: "Etli Ekmek" },
       { id: 3, url: "https://images.unsplash.com/photo-1759736859407-a676ed566968?w=1200&q=85", label: "Malzemeler" },
       { id: 4, url: "https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&q=85", label: "Kebap" },
-      { id: 5, url: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=1200&q=85", label: "Sofra" },
+      { id: 5, url: "https://images.unsplash.com/photo-wrvQCkhL4sk?w=1200&q=85", label: "Sofra" },
     ],
     description: `Konya'nın tescilli yöresel lezzetlerini tek bir atölyede keşfedin: etli ekmek hamurundan bamya çorbasına, fırın kebabından tirit ve peksimetli tatlıya kadar şehrin damak hafızasını oluşturan tarifleri uzman şef eşliğinde pişireceksiniz.
 

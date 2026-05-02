@@ -61,7 +61,7 @@ const featured = [
     maxParticipants: "Max 15 kişi",
     category: "Mevlana & Tasavvuf",
     badge: "Çok Sevilen",
-    image: "https://images.unsplash.com/photo-1529060256154-8dca470c3325?w=800&q=80",
+    image: "https://images.unsplash.com/photo--hp5d9O3MEk?w=800&q=80",
   },
   {
     id: "3",
@@ -75,7 +75,7 @@ const featured = [
     maxParticipants: "Max 12 kişi",
     category: "Konya Mutfağı",
     badge: "Öne Çıkan",
-    image: "https://images.unsplash.com/photo-1632158930341-46604b637a0f?w=800&q=80",
+    image: "https://images.unsplash.com/photo-I0ha_pMquU4?w=800&q=80",
   },
 ]
 

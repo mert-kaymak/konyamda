@@ -61,7 +61,7 @@ const ALL_EXPERIENCES: Experience[] = [
     rating: 4.9,
     reviewCount: 318,
     isFeatured: true,
-    image: "https://images.unsplash.com/photo-1529060256154-8dca470c3325?w=800&q=80",
+    image: "https://images.unsplash.com/photo--hp5d9O3MEk?w=800&q=80",
   },
   {
     id: "3",
@@ -76,7 +76,7 @@ const ALL_EXPERIENCES: Experience[] = [
     rating: 4.8,
     reviewCount: 127,
     isFeatured: true,
-    image: "https://images.unsplash.com/photo-1632158930341-46604b637a0f?w=800&q=80",
+    image: "https://images.unsplash.com/photo-I0ha_pMquU4?w=800&q=80",
   },
   {
     id: "4",
@@ -119,7 +119,7 @@ const ALL_EXPERIENCES: Experience[] = [
     durationMinutes: 240,
     rating: 5.0,
     reviewCount: 73,
-    image: "https://images.unsplash.com/photo-1716754430696-22912c597421?w=800&q=80",
+    image: "https://images.unsplash.com/photo-qAroWT1XMic?w=800&q=80",
   },
   {
     id: "7",
@@ -161,7 +161,7 @@ const ALL_EXPERIENCES: Experience[] = [
     durationMinutes: 150,
     rating: 4.6,
     reviewCount: 58,
-    image: "https://images.unsplash.com/photo-1585297502780-9f8b5ca4ff13?w=800&q=80",
+    image: "https://images.unsplash.com/photo-n3rOsLFh2ZY?w=800&q=80",
   },
   {
     id: "10",
