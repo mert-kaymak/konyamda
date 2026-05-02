@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
@@ -20,10 +20,8 @@ import {
   CalendarDays,
   CheckCircle2,
   ChevronDown,
-  Clock,
   Loader2,
   LogOut,
-  MapPin,
   Sparkles,
   Users,
 } from "lucide-react"
@@ -42,122 +40,26 @@ interface ProfileRow {
   is_organizer: boolean
 }
 
-interface MockBooking {
+interface Booking {
   id: string
-  experience: string
-  category: string
-  location: string
-  date: string
-  duration: string
-  participants: number
-  total: number
+  experience_id: string
+  participant_count: number
+  booking_date: string
+  total_price: number
   status: BookingStatus
-  color: string
+  created_at: string
 }
 
-// ─── Mock Data ────────────────────────────────────────────────────────────────
+// ─── Experience UUID → İsim eşlemesi ─────────────────────────────────────────
 
-const MOCK_BOOKINGS: MockBooking[] = [
-  // Bekleyen
-  {
-    id: "b1",
-    experience: "Mevlana Müzesi Özel Rehberli Tur",
-    category: "Kültür & Tarih",
-    location: "Karatay, Konya",
-    date: "2026-05-10",
-    duration: "2 saat",
-    participants: 2,
-    total: 700,
-    status: "pending",
-    color: "#7B2D35",
-  },
-  {
-    id: "b2",
-    experience: "Etli Ekmek Yapım Atölyesi",
-    category: "Konya Mutfağı",
-    location: "Selçuklu, Konya",
-    date: "2026-05-15",
-    duration: "3 saat",
-    participants: 4,
-    total: 1120,
-    status: "pending",
-    color: "#b45309",
-  },
-  {
-    id: "b3",
-    experience: "Sille Köyü Fotoğraf Turu",
-    category: "Gezi & Tur",
-    location: "Sille, Konya",
-    date: "2026-05-22",
-    duration: "4 saat",
-    participants: 1,
-    total: 450,
-    status: "pending",
-    color: "#166534",
-  },
-  // Onaylanan
-  {
-    id: "b4",
-    experience: "Sema Gösterisi (Mevlevi Ayini)",
-    category: "Kültür & Tarih",
-    location: "Mevlana Kültür Merkezi",
-    date: "2026-05-03",
-    duration: "1.5 saat",
-    participants: 3,
-    total: 750,
-    status: "confirmed",
-    color: "#7B2D35",
-  },
-  {
-    id: "b5",
-    experience: "Geleneksel Çömlek Yapımı Atölyesi",
-    category: "El Sanatları",
-    location: "Karatay, Konya",
-    date: "2026-05-07",
-    duration: "2.5 saat",
-    participants: 2,
-    total: 560,
-    status: "confirmed",
-    color: "#92400e",
-  },
-  // Tamamlanan
-  {
-    id: "b6",
-    experience: "Karatay Medresesi Rehberli Tur",
-    category: "Kültür & Tarih",
-    location: "Karatay, Konya",
-    date: "2026-03-15",
-    duration: "2 saat",
-    participants: 4,
-    total: 1080,
-    status: "completed",
-    color: "#374151",
-  },
-  {
-    id: "b7",
-    experience: "Tarihi Kapalı Çarşı & Bedesten Turu",
-    category: "Gezi & Tur",
-    location: "Selçuklu, Konya",
-    date: "2026-04-02",
-    duration: "3 saat",
-    participants: 3,
-    total: 630,
-    status: "completed",
-    color: "#1d4ed8",
-  },
-  {
-    id: "b8",
-    experience: "Konya Gastronomik Yürüyüş Turu",
-    category: "Konya Mutfağı",
-    location: "Merkez, Konya",
-    date: "2026-04-18",
-    duration: "3.5 saat",
-    participants: 2,
-    total: 600,
-    status: "completed",
-    color: "#b45309",
-  },
-]
+const EXPERIENCE_TITLES: Record<string, string> = {
+  "f47ac10b-58cc-4372-a567-0e02b2c3d001": "Etli Ekmek Yapım Atölyesi",
+  "f47ac10b-58cc-4372-a567-0e02b2c3d002": "Sille Köyü Fotoğraf Turu",
+  "f47ac10b-58cc-4372-a567-0e02b2c3d003": "Geleneksel Çini Boyama Atölyesi",
+  "f47ac10b-58cc-4372-a567-0e02b2c3d004": "Beyşehir Gölü Gün Batımı Teknesi",
+  "f47ac10b-58cc-4372-a567-0e02b2c3d005": "Leylekler Vadisi Doğa Yürüyüşü",
+  "f47ac10b-58cc-4372-a567-0e02b2c3d006": "Mevlana Müzesi Gece Turu + Sema",
+}
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -171,13 +73,7 @@ function formatDate(dateStr: string) {
 
 function getInitials(fullName: string | null, email: string) {
   if (fullName?.trim()) {
-    return fullName
-      .trim()
-      .split(" ")
-      .map((n) => n[0])
-      .slice(0, 2)
-      .join("")
-      .toUpperCase()
+    return fullName.trim().split(" ").map((n) => n[0]).slice(0, 2).join("").toUpperCase()
   }
   return email[0].toUpperCase()
 }
@@ -189,8 +85,6 @@ const STATUS_CONFIG = {
     text: "text-yellow-700",
     border: "border-yellow-200",
     dot: "bg-yellow-400",
-    sectionBg: "bg-yellow-50/60",
-    sectionBorder: "border-yellow-100",
   },
   confirmed: {
     label: "Onaylandı",
@@ -198,8 +92,6 @@ const STATUS_CONFIG = {
     text: "text-green-700",
     border: "border-green-200",
     dot: "bg-green-500",
-    sectionBg: "bg-green-50/60",
-    sectionBorder: "border-green-100",
   },
   completed: {
     label: "Tamamlandı",
@@ -207,28 +99,21 @@ const STATUS_CONFIG = {
     text: "text-gray-600",
     border: "border-gray-200",
     dot: "bg-gray-400",
-    sectionBg: "bg-gray-50/60",
-    sectionBorder: "border-gray-100",
   },
 }
 
 // ─── Reservation Card ─────────────────────────────────────────────────────────
 
-function ReservationCard({ booking }: { booking: MockBooking }) {
-  const st = STATUS_CONFIG[booking.status]
+function ReservationCard({ booking }: { booking: Booking }) {
+  const st = STATUS_CONFIG[booking.status] ?? STATUS_CONFIG.pending
+  const title = EXPERIENCE_TITLES[booking.experience_id] ?? "Deneyim"
+
   return (
     <div className="flex gap-4 rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-      {/* Color accent */}
-      <div
-        className="w-1 rounded-full shrink-0"
-        style={{ backgroundColor: booking.color }}
-      />
-
+      <div className="w-1 rounded-full shrink-0 bg-[#7B2D35]" />
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-3 mb-2">
-          <h3 className="font-semibold text-gray-900 text-sm leading-snug">
-            {booking.experience}
-          </h3>
+          <h3 className="font-semibold text-gray-900 text-sm leading-snug">{title}</h3>
           <span
             className={`inline-flex shrink-0 items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium border ${st.bg} ${st.text} ${st.border}`}
           >
@@ -236,30 +121,20 @@ function ReservationCard({ booking }: { booking: MockBooking }) {
             {st.label}
           </span>
         </div>
-
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-500">
           <span className="flex items-center gap-1">
             <CalendarDays className="h-3.5 w-3.5" />
-            {formatDate(booking.date)}
-          </span>
-          <span className="flex items-center gap-1">
-            <MapPin className="h-3.5 w-3.5" />
-            {booking.location}
-          </span>
-          <span className="flex items-center gap-1">
-            <Clock className="h-3.5 w-3.5" />
-            {booking.duration}
+            {formatDate(booking.booking_date)}
           </span>
           <span className="flex items-center gap-1">
             <Users className="h-3.5 w-3.5" />
-            {booking.participants} kişi
+            {booking.participant_count} kişi
           </span>
         </div>
       </div>
-
       <div className="shrink-0 text-right">
         <p className="text-base font-bold text-gray-900">
-          ₺{booking.total.toLocaleString("tr-TR")}
+          ₺{Number(booking.total_price).toLocaleString("tr-TR")}
         </p>
         <p className="text-xs text-gray-400 mt-0.5">toplam</p>
       </div>
@@ -269,31 +144,20 @@ function ReservationCard({ booking }: { booking: MockBooking }) {
 
 // ─── Section ─────────────────────────────────────────────────────────────────
 
-function BookingSection({
-  status,
-  bookings,
-}: {
-  status: BookingStatus
-  bookings: MockBooking[]
-}) {
+function BookingSection({ status, bookings }: { status: BookingStatus; bookings: Booking[] }) {
   const st = STATUS_CONFIG[status]
   if (bookings.length === 0) return null
-
   return (
     <div>
       <div className="flex items-center gap-2 mb-3">
         <span className={`h-2 w-2 rounded-full ${st.dot}`} />
-        <h2 className="text-sm font-semibold text-gray-700">
-          {st.label}
-        </h2>
+        <h2 className="text-sm font-semibold text-gray-700">{st.label}</h2>
         <span className="text-xs text-gray-400 bg-gray-100 rounded-full px-2 py-0.5">
           {bookings.length}
         </span>
       </div>
       <div className="space-y-3">
-        {bookings.map((b) => (
-          <ReservationCard key={b.id} booking={b} />
-        ))}
+        {bookings.map((b) => <ReservationCard key={b.id} booking={b} />)}
       </div>
     </div>
   )
@@ -311,6 +175,10 @@ export default function DashboardClient({
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<Tab>("rezervasyonlar")
 
+  // Bookings state
+  const [bookings, setBookings] = useState<Booking[]>([])
+  const [bookingsLoading, setBookingsLoading] = useState(true)
+
   // Profile form
   const [profileForm, setProfileForm] = useState({
     fullName: profile.full_name ?? "",
@@ -323,9 +191,23 @@ export default function DashboardClient({
   const initials = getInitials(profile.full_name, email)
   const displayName = profile.full_name?.trim() || email.split("@")[0]
 
-  const pending   = MOCK_BOOKINGS.filter((b) => b.status === "pending")
-  const confirmed = MOCK_BOOKINGS.filter((b) => b.status === "confirmed")
-  const completed = MOCK_BOOKINGS.filter((b) => b.status === "completed")
+  // Supabase'den gerçek rezervasyonları çek
+  useEffect(() => {
+    const supabase = createClient()
+    supabase
+      .from("bookings")
+      .select("id, experience_id, participant_count, booking_date, total_price, status, created_at")
+      .eq("user_id", profile.id)
+      .order("created_at", { ascending: false })
+      .then(({ data, error }) => {
+        if (!error && data) setBookings(data as Booking[])
+        setBookingsLoading(false)
+      })
+  }, [profile.id])
+
+  const pending   = bookings.filter((b) => b.status === "pending")
+  const confirmed = bookings.filter((b) => b.status === "confirmed")
+  const completed = bookings.filter((b) => b.status === "completed")
 
   async function handleLogout() {
     const supabase = createClient()
@@ -338,7 +220,6 @@ export default function DashboardClient({
     setProfileSaving(true)
     setProfileError(null)
     setProfileSuccess(false)
-
     const supabase = createClient()
     const { error } = await supabase
       .from("profiles")
@@ -347,7 +228,6 @@ export default function DashboardClient({
         phone: profileForm.phone.trim() || null,
       })
       .eq("id", profile.id)
-
     setProfileSaving(false)
     if (error) {
       setProfileError("Güncelleme başarısız oldu. Lütfen tekrar deneyin.")
@@ -363,10 +243,7 @@ export default function DashboardClient({
       {/* ── Header ── */}
       <header className="sticky top-0 z-10 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-4xl mx-auto flex h-16 items-center justify-between px-4">
-          <Link href="/" className="text-xl font-bold text-[#7B2D35]">
-            konyamda
-          </Link>
-
+          <Link href="/" className="text-xl font-bold text-[#7B2D35]">konyamda</Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="flex items-center gap-2.5 rounded-xl border border-gray-200 bg-white px-3 py-2 hover:bg-gray-50 transition-colors">
@@ -418,8 +295,6 @@ export default function DashboardClient({
               Rezervasyonlarını takip et ve profilini düzenle.
             </p>
           </div>
-
-          {/* Tabs */}
           <div className="flex gap-1">
             {(
               [
@@ -449,28 +324,11 @@ export default function DashboardClient({
         {/* ── Rezervasyonlarım ── */}
         {activeTab === "rezervasyonlar" && (
           <div className="space-y-8">
-            {/* Summary cards */}
-            <div className="grid grid-cols-3 gap-4">
-              {[
-                { label: "Bekleyen",    count: pending.length,   color: "text-yellow-600", bg: "bg-yellow-50"  },
-                { label: "Onaylanan",   count: confirmed.length, color: "text-green-600",  bg: "bg-green-50"   },
-                { label: "Tamamlanan",  count: completed.length, color: "text-gray-600",   bg: "bg-gray-100"   },
-              ].map((s) => (
-                <Card key={s.label} className={`${s.bg} border-0 shadow-none`}>
-                  <CardContent className="p-4 text-center">
-                    <p className={`text-2xl font-bold ${s.color}`}>{s.count}</p>
-                    <p className="text-xs text-gray-500 mt-0.5">{s.label}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            {/* Sections */}
-            <BookingSection status="pending"   bookings={pending}   />
-            <BookingSection status="confirmed" bookings={confirmed} />
-            <BookingSection status="completed" bookings={completed} />
-
-            {MOCK_BOOKINGS.length === 0 && (
+            {bookingsLoading ? (
+              <div className="flex justify-center py-20">
+                <Loader2 className="h-8 w-8 animate-spin text-[#7B2D35]" />
+              </div>
+            ) : bookings.length === 0 ? (
               <div className="text-center py-20">
                 <CalendarDays className="h-12 w-12 text-gray-300 mx-auto mb-4" />
                 <p className="text-gray-500 font-medium">Henüz rezervasyonunuz yok.</p>
@@ -478,6 +336,28 @@ export default function DashboardClient({
                   <Link href="/deneyimler">Deneyimleri Keşfet</Link>
                 </Button>
               </div>
+            ) : (
+              <>
+                {/* Özet kartlar */}
+                <div className="grid grid-cols-3 gap-4">
+                  {[
+                    { label: "Bekleyen",   count: pending.length,   color: "text-yellow-600", bg: "bg-yellow-50" },
+                    { label: "Onaylanan",  count: confirmed.length, color: "text-green-600",  bg: "bg-green-50"  },
+                    { label: "Tamamlanan", count: completed.length, color: "text-gray-600",   bg: "bg-gray-100"  },
+                  ].map((s) => (
+                    <Card key={s.label} className={`${s.bg} border-0 shadow-none`}>
+                      <CardContent className="p-4 text-center">
+                        <p className={`text-2xl font-bold ${s.color}`}>{s.count}</p>
+                        <p className="text-xs text-gray-500 mt-0.5">{s.label}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                <BookingSection status="pending"   bookings={pending}   />
+                <BookingSection status="confirmed" bookings={confirmed} />
+                <BookingSection status="completed" bookings={completed} />
+              </>
             )}
           </div>
         )}
@@ -485,7 +365,6 @@ export default function DashboardClient({
         {/* ── Profil ── */}
         {activeTab === "profil" && (
           <div className="max-w-lg">
-            {/* Avatar */}
             <div className="flex items-center gap-4 mb-8 p-5 bg-white rounded-lg border border-gray-100 shadow-sm">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#7B2D35] text-white text-xl font-bold shrink-0">
                 {initials}
@@ -503,7 +382,6 @@ export default function DashboardClient({
               </div>
             </div>
 
-            {/* Form */}
             <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-6 space-y-5">
               <h2 className="text-base font-semibold text-gray-900">Kişisel Bilgiler</h2>
 
@@ -527,9 +405,7 @@ export default function DashboardClient({
                   id="fullName"
                   placeholder="Adınız Soyadınız"
                   value={profileForm.fullName}
-                  onChange={(e) =>
-                    setProfileForm({ ...profileForm, fullName: e.target.value })
-                  }
+                  onChange={(e) => setProfileForm({ ...profileForm, fullName: e.target.value })}
                   className="h-11"
                 />
               </div>
@@ -543,9 +419,7 @@ export default function DashboardClient({
                   disabled
                   className="h-11 bg-gray-50 text-gray-500 cursor-not-allowed"
                 />
-                <p className="text-xs text-gray-400">
-                  E-posta adresi değiştirilemez.
-                </p>
+                <p className="text-xs text-gray-400">E-posta adresi değiştirilemez.</p>
               </div>
 
               <div className="space-y-1.5">
@@ -555,9 +429,7 @@ export default function DashboardClient({
                   type="tel"
                   placeholder="0555 000 00 00"
                   value={profileForm.phone}
-                  onChange={(e) =>
-                    setProfileForm({ ...profileForm, phone: e.target.value })
-                  }
+                  onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
                   className="h-11"
                 />
               </div>
@@ -567,16 +439,11 @@ export default function DashboardClient({
                 disabled={profileSaving}
                 className="w-full h-11 bg-[#7B2D35] hover:bg-[#6a2630] text-white font-medium"
               >
-                {profileSaving ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  "Değişiklikleri Kaydet"
-                )}
+                {profileSaving ? <Loader2 className="h-4 w-4 animate-spin" /> : "Değişiklikleri Kaydet"}
               </Button>
             </div>
           </div>
         )}
-
       </main>
     </div>
   )
