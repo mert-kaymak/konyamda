@@ -60,7 +60,7 @@ interface ExperienceDetail {
 
 const DETAILS: Record<string, ExperienceDetail> = {
   "etli-ekmek-yapim-atolyesi": {
-    id: "1",
+    id: "f47ac10b-58cc-4372-a567-0e02b2c3d001",
     slug: "etli-ekmek-yapim-atolyesi",
     title: "Etli Ekmek Yapım Atölyesi",
     category: "Yemek & Mutfak",
@@ -114,7 +114,7 @@ Yüzyıllık geleneksel tarifi ve tüm püf noktalarını öğrenirken atölye b
   },
 
   "sille-koyu-fotograf-turu": {
-    id: "2",
+    id: "f47ac10b-58cc-4372-a567-0e02b2c3d002",
     slug: "sille-koyu-fotograf-turu",
     title: "Sille Köyü Fotoğraf Turu",
     category: "Fotoğrafçılık & Sanat",
@@ -167,7 +167,7 @@ Profesyonel fotoğrafçı rehberimiz eşliğinde kompozisyon, ışık kullanım�
   },
 
   "geleneksel-cini-boyama-atolyesi": {
-    id: "3",
+    id: "f47ac10b-58cc-4372-a567-0e02b2c3d003",
     slug: "geleneksel-cini-boyama-atolyesi",
     title: "Geleneksel Çini Boyama Atölyesi",
     category: "Sanat & El Sanatları",
@@ -220,7 +220,7 @@ Boyanan çini karo pişirme sürecinden geçirilerek bir hafta içinde adresiniz
   },
 
   "beysehir-golu-gun-batimi-teknesi": {
-    id: "4",
+    id: "f47ac10b-58cc-4372-a567-0e02b2c3d004",
     slug: "beysehir-golu-gun-batimi-teknesi",
     title: "Beyşehir Gölü Gün Batımı Teknesi",
     category: "Doğa & Macera",
@@ -274,7 +274,7 @@ Teknede canlı müzik, atıştırmalıklar ve sıcak içeceklerle gün batımın
   },
 
   "leylekler-vadisi-doga-yuruyu": {
-    id: "5",
+    id: "f47ac10b-58cc-4372-a567-0e02b2c3d005",
     slug: "leylekler-vadisi-doga-yuruyu",
     title: "Leylekler Vadisi Doğa Yürüyüşü",
     category: "Doğa & Macera",
@@ -327,7 +327,7 @@ Yürüyüşün ortasında gölgeli bir alanda hazırlanan piknik molası, hem di
   },
 
   "mevlana-muzesi-gece-turu-sema": {
-    id: "6",
+    id: "f47ac10b-58cc-4372-a567-0e02b2c3d006",
     slug: "mevlana-muzesi-gece-turu-sema",
     title: "Mevlana Müzesi Gece Turu + Sema",
     category: "Kültür & Tarih",
