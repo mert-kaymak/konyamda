@@ -445,12 +445,14 @@ function BookingCard({
   reviewCount,
   maxParticipants,
   experienceSlug,
+  experienceTitle,
 }: {
   price: number
   rating: number
   reviewCount: number
   maxParticipants: number
   experienceSlug: string
+  experienceTitle: string
 }) {
   const router = useRouter()
   const [selectedDate, setSelectedDate] = useState<Date | undefined>()
@@ -474,21 +476,9 @@ function BookingCard({
       return
     }
 
-    // Supabase'den experience UUID'sini slug ile bul
-    const { data: expRow } = await supabase
-      .from("experiences")
-      .select("id")
-      .eq("slug", experienceSlug)
-      .single()
-
-    if (!expRow) {
-      setStatus("error")
-      setErrorMsg("Bu deneyim henüz rezervasyon sistemine eklenmemiş. Yakında aktif olacak.")
-      return
-    }
-
     const { error } = await supabase.from("bookings").insert({
-      experience_id: expRow.id,
+      experience_slug: experienceSlug,
+      experience_title: experienceTitle,
       user_id: user.id,
       participant_count: participants,
       booking_date: selectedDate.toISOString().split("T")[0],
@@ -858,6 +848,7 @@ export default function ExperienceDetailPage() {
                   reviewCount={exp.reviewCount}
                   maxParticipants={exp.maxParticipants}
                   experienceSlug={exp.slug}
+                  experienceTitle={exp.title}
                 />
               </div>
             </div>

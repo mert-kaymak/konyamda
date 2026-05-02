@@ -100,7 +100,9 @@ create index if not exists experiences_featured_idx   on public.experiences (is_
 -- ------------------------------------------------------------
 create table if not exists public.bookings (
   id                uuid primary key default gen_random_uuid(),
-  experience_id     uuid not null references public.experiences (id) on delete cascade,
+  experience_id     uuid references public.experiences (id) on delete cascade,
+  experience_slug   text,
+  experience_title  text,
   user_id           uuid not null references public.profiles (id) on delete cascade,
   participant_count int not null default 1 check (participant_count > 0),
   booking_date      date not null,
@@ -110,6 +112,12 @@ create table if not exists public.bookings (
   notes             text,
   created_at        timestamptz not null default now()
 );
+
+-- Mevcut tablo için migration (Supabase Dashboard > SQL Editor'de çalıştırın):
+-- ALTER TABLE public.bookings
+--   ALTER COLUMN experience_id DROP NOT NULL,
+--   ADD COLUMN IF NOT EXISTS experience_slug text,
+--   ADD COLUMN IF NOT EXISTS experience_title text;
 
 create index if not exists bookings_user_idx       on public.bookings (user_id);
 create index if not exists bookings_experience_idx on public.bookings (experience_id);
