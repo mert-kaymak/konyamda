@@ -445,14 +445,12 @@ function BookingCard({
   reviewCount,
   maxParticipants,
   experienceSlug,
-  experienceTitle,
 }: {
   price: number
   rating: number
   reviewCount: number
   maxParticipants: number
   experienceSlug: string
-  experienceTitle: string
 }) {
   const router = useRouter()
   const [selectedDate, setSelectedDate] = useState<Date | undefined>()
@@ -476,9 +474,22 @@ function BookingCard({
       return
     }
 
+    const { data: expRow, error: expError } = await supabase
+      .from("experiences")
+      .select("id")
+      .eq("slug", experienceSlug)
+      .single()
+
+    console.log("Experience lookup:", expRow, expError)
+
+    if (!expRow) {
+      setStatus("error")
+      setErrorMsg("Deneyim bulunamadı. Lütfen sayfayı yenileyip tekrar deneyin.")
+      return
+    }
+
     const payload = {
-      experience_slug: experienceSlug,
-      experience_title: experienceTitle,
+      experience_id: expRow.id,
       user_id: user.id,
       participant_count: participants,
       booking_date: selectedDate.toISOString().split("T")[0],
@@ -855,7 +866,6 @@ export default function ExperienceDetailPage() {
                   reviewCount={exp.reviewCount}
                   maxParticipants={exp.maxParticipants}
                   experienceSlug={exp.slug}
-                  experienceTitle={exp.title}
                 />
               </div>
             </div>
