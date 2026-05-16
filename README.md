@@ -4,13 +4,12 @@
   <h1>konyamda</h1>
 
   <p>
-    Konya'nın yerel deneyimlerini keşfet, rezervasyon yap, yaşat.<br/>
-    <em>Discover, book and experience the best of Konya.</em>
+    Discover, book and experience the best of Konya.
   </p>
 
   <p>
     <a href="https://konyam-da.vercel.app" target="_blank">
-      <img src="https://img.shields.io/badge/Canlı%20Site-konyam--da.vercel.app-7B2D35?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Site" />
+      <img src="https://img.shields.io/badge/Live%20Site-konyam--da.vercel.app-7B2D35?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Site" />
     </a>
   </p>
 
@@ -25,54 +24,52 @@
 
 ---
 
-## Hakkında / About
+## About
 
-**TR:** konyamda, Konya'nın atölye, tur ve aktivitelerini tek çatı altında toplayan yerel deneyim platformudur. Kullanıcılar ilgi alanlarına göre deneyim keşfedip rezervasyon yaparken, organizatörler kendi deneyimlerini kolayca yönetebilir.
-
-**EN:** konyamda is a local experience marketplace built for Konya, Turkey. Users explore and book workshops, tours, and activities across five categories, while organizers manage their listings and reservations through a dedicated dashboard.
+konyamda is a local experience marketplace built for Konya, Turkey. Users explore and book workshops, tours, and activities across five categories, while organizers manage their listings and reservations through a dedicated dashboard.
 
 ---
 
-## Özellikler / Features
+## Features
 
-- **Deneyim Keşfi** — Kategori ve arama filtreleriyle 50+ özgün yerel deneyime ulaş
-- **Rezervasyon Sistemi** — Anlık rezervasyon yap, geçmişini ve durumunu takip et
-- **Kimlik Doğrulama** — E-posta/şifre ve Google OAuth ile güvenli giriş (Supabase Auth)
-- **Rol Tabanlı Erişim** — Kullanıcı ve organizatör için ayrı paneller, sunucu taraflı route koruması
-- **Organizatör Paneli** — Deneyim ekle, düzenle, sil; gelen rezervasyonları görüntüle
-- **Şifre Sıfırlama** — E-posta tabanlı güvenli sıfırlama akışı
+- **Experience Discovery** — Browse 50+ unique local experiences with category and search filters
+- **Booking System** — Instant reservations with booking history and status tracking
+- **Authentication** — Secure sign-in via email/password and Google OAuth (Supabase Auth)
+- **Role-Based Access** — Separate dashboards for users and organizers with server-side route protection
+- **Organizer Dashboard** — Create, edit, and delete experiences; view and manage incoming bookings
+- **Password Reset** — Secure email-based password reset flow
 
 ---
 
-## Teknoloji Yığını / Tech Stack
+## Tech Stack
 
-| Katman | Teknoloji |
-|--------|-----------|
+| Layer | Technology |
+|-------|------------|
 | Framework | Next.js 16 (App Router) |
-| Dil | TypeScript 5 |
+| Language | TypeScript 5 |
 | UI | Tailwind CSS v4 + shadcn/ui (Radix UI) |
 | Backend / Auth / DB | Supabase (PostgreSQL + Row Level Security) |
-| Deploy | Vercel |
+| Deployment | Vercel |
 | Font | Geist (next/font) |
 
 ---
 
-## Ekran Görüntüleri / Screenshots
+## Screenshots
 
-![Ana Sayfa](public/screenshots/anasayfa.png.png)
-![Deneyimler](public/screenshots/deneyimler.png.png)
-![Organizatör](public/screenshots/organizator.png.png)
+![Home](public/screenshots/anasayfa.png.png)
+![Experiences](public/screenshots/deneyimler.png.png)
+![Organizer Dashboard](public/screenshots/organizator.png.png)
 
 ---
 
-## Kurulum / Setup
+## Getting Started
 
-### Ön gereksinimler
+### Prerequisites
 
 - Node.js 18+
-- Bir [Supabase](https://supabase.com) projesi
+- A [Supabase](https://supabase.com) project
 
-### 1. Repoyu klonla
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/mert-kaymak/KonyamDa.git
@@ -80,84 +77,84 @@ cd KonyamDa
 npm install
 ```
 
-### 2. Ortam değişkenlerini ayarla
+### 2. Configure environment variables
 
 ```bash
 cp .env.example .env.local
 ```
 
-`.env.local` dosyasını açıp Supabase bilgilerini gir:
+Open `.env.local` and fill in your Supabase credentials:
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=https://<proje-id>.supabase.co
+NEXT_PUBLIC_SUPABASE_URL=https://<project-id>.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key>
 ```
 
 > Supabase Dashboard → Project Settings → API
 
-### 3. Veritabanı şemasını çalıştır
+### 3. Run the database schema
 
-Supabase Dashboard → SQL Editor'e git, `supabase/schema.sql` içeriğini yapıştır ve çalıştır.
+Go to Supabase Dashboard → SQL Editor, paste the contents of `supabase/schema.sql`, and run it.
 
-Oluşturulan tablolar: `profiles`, `categories`, `experiences`, `bookings`, `reviews`
+Tables created: `profiles`, `categories`, `experiences`, `bookings`, `reviews`
 
-### 4. (İsteğe bağlı) Google OAuth
+### 4. (Optional) Google OAuth
 
 Supabase Dashboard → Authentication → Providers → Google  
 Callback URL: `https://<domain>/auth/callback`
 
-### 5. Geliştirme sunucusunu başlat
+### 5. Start the development server
 
 ```bash
 npm run dev
 ```
 
-[http://localhost:3000](http://localhost:3000) adresini aç.
+Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## Scriptler
+## Scripts
 
 ```bash
-npm run dev      # Geliştirme sunucusu (Turbopack)
-npm run build    # Üretim build'i
-npm run start    # Üretim sunucusu
+npm run dev      # Development server (Turbopack)
+npm run build    # Production build
+npm run start    # Production server
 ```
 
 ---
 
-## Ekip / Team
+## Team
 
 <table>
   <tr>
     <td align="center">
       <img src="public/mert.jpg.png" width="80" style="border-radius:50%" /><br/>
       <b>Mert Kaymak</b><br/>
-      <sub>Kurucu & CEO</sub>
+      <sub>Co-founder & CEO</sub>
     </td>
     <td align="center">
       <img src="public/ahmet.jpg.jpeg" width="80" style="border-radius:50%" /><br/>
       <b>Ahmet Alperen Arslan</b><br/>
-      <sub>Kurucu Ortak & CTO</sub>
+      <sub>Co-founder & CTO</sub>
     </td>
     <td align="center">
       <img src="public/toygun.jpg.jpeg" width="80" style="border-radius:50%" /><br/>
       <b>Toygun Galyan</b><br/>
-      <sub>Kurucu Ortak & CMO</sub>
+      <sub>Co-founder & CMO</sub>
     </td>
   </tr>
 </table>
 
 ---
 
-## İletişim / Contact
+## Contact
 
-**E-posta:** iletisim.konyamda@gmail.com  
+**Email:** iletisim.konyamda@gmail.com  
 **Web:** [konyam-da.vercel.app](https://konyam-da.vercel.app)  
-**Adres:** Selçuklu, Konya, Türkiye
+**Location:** Selçuklu, Konya, Turkey
 
 ---
 
 <div align="center">
-  <sub>© 2026 konyamda — Konya'nın en canlı deneyim platformu</sub>
+  <sub>© 2026 konyamda — Konya's local experience platform</sub>
 </div>
