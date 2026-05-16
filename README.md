@@ -59,12 +59,9 @@
 
 ## Ekran Görüntüleri / Screenshots
 
-> Ekran görüntüleri yakında eklenecektir.
-> *Screenshots coming soon.*
-
-| Ana Sayfa | Deneyimler | Organizatör Paneli |
-|:---------:|:----------:|:-----------------:|
-| ![Ana Sayfa](docs/screenshots/home.png) | ![Deneyimler](docs/screenshots/experiences.png) | ![Organizatör](docs/screenshots/organizer.png) |
+![Ana Sayfa](public/screenshots/anasayfa.png)
+![Deneyimler](public/screenshots/deneyimler.png)
+![Organizatör](public/screenshots/organizator.png)
 
 ---
 
