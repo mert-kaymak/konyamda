@@ -59,9 +59,9 @@
 
 ## Ekran Görüntüleri / Screenshots
 
-![Ana Sayfa](public/screenshots/anasayfa.png)
-![Deneyimler](public/screenshots/deneyimler.png)
-![Organizatör](public/screenshots/organizator.png)
+![Ana Sayfa](public/screenshots/anasayfa.png.png)
+![Deneyimler](public/screenshots/deneyimler.png.png)
+![Organizatör](public/screenshots/organizator.png.png)
 
 ---
 
