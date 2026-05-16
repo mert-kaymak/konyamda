@@ -1,44 +1,85 @@
-# KonyamDa
+<div align="center">
+  <img src="public/logo.png" alt="konyamda logo" width="160" />
 
-Konya'nın yerel deneyimlerini — atölye, tur ve aktivitelerini — bir araya getiren rezervasyon platformu. Organizatörler kendi deneyimlerini yönetebilir, kullanıcılar keşfedip rezervasyon yapabilir.
+  <h1>konyamda</h1>
+
+  <p>
+    Konya'nın yerel deneyimlerini keşfet, rezervasyon yap, yaşat.<br/>
+    <em>Discover, book and experience the best of Konya.</em>
+  </p>
+
+  <p>
+    <a href="https://konyam-da.vercel.app" target="_blank">
+      <img src="https://img.shields.io/badge/Canlı%20Site-konyam--da.vercel.app-7B2D35?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Site" />
+    </a>
+  </p>
+
+  <p>
+    <img src="https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js" />
+    <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" />
+    <img src="https://img.shields.io/badge/Supabase-PostgreSQL-3FCF8E?style=flat-square&logo=supabase&logoColor=white" />
+    <img src="https://img.shields.io/badge/Vercel-deployed-black?style=flat-square&logo=vercel" />
+  </p>
+</div>
 
 ---
 
-## Özellikler
+## Hakkında / About
 
-- **Kullanıcı tarafı** — Deneyimleri keşfet, rezervasyon yap, geçmişi takip et
-- **Organizatör paneli** — Deneyim ekle / düzenle / sil, rezervasyonları görüntüle
-- **Kimlik doğrulama** — E-posta + şifre ve Google OAuth (Supabase Auth)
-- **Şifre sıfırlama** — E-posta ile sıfırlama akışı
-- **Rol tabanlı erişim** — `is_organizer` bayrağı ile ayrı paneller
-- **Route koruması** — `proxy.ts` (Next.js 16 Middleware) ile sunucu taraflı yönlendirme
+**TR:** konyamda, Konya'nın atölye, tur ve aktivitelerini tek çatı altında toplayan yerel deneyim platformudur. Kullanıcılar ilgi alanlarına göre deneyim keşfedip rezervasyon yaparken, organizatörler kendi deneyimlerini kolayca yönetebilir.
 
-## Teknoloji Yığını
+**EN:** konyamda is a local experience marketplace built for Konya, Turkey. Users explore and book workshops, tours, and activities across five categories, while organizers manage their listings and reservations through a dedicated dashboard.
+
+---
+
+## Özellikler / Features
+
+- **Deneyim Keşfi** — Kategori ve arama filtreleriyle 50+ özgün yerel deneyime ulaş
+- **Rezervasyon Sistemi** — Anlık rezervasyon yap, geçmişini ve durumunu takip et
+- **Kimlik Doğrulama** — E-posta/şifre ve Google OAuth ile güvenli giriş (Supabase Auth)
+- **Rol Tabanlı Erişim** — Kullanıcı ve organizatör için ayrı paneller, sunucu taraflı route koruması
+- **Organizatör Paneli** — Deneyim ekle, düzenle, sil; gelen rezervasyonları görüntüle
+- **Şifre Sıfırlama** — E-posta tabanlı güvenli sıfırlama akışı
+
+---
+
+## Teknoloji Yığını / Tech Stack
 
 | Katman | Teknoloji |
-|---|---|
+|--------|-----------|
 | Framework | Next.js 16 (App Router) |
+| Dil | TypeScript 5 |
 | UI | Tailwind CSS v4 + shadcn/ui (Radix UI) |
 | Backend / Auth / DB | Supabase (PostgreSQL + Row Level Security) |
-| Dil | TypeScript |
+| Deploy | Vercel |
 | Font | Geist (next/font) |
 
 ---
 
-## Ön Gereksinimler
+## Ekran Görüntüleri / Screenshots
+
+> Ekran görüntüleri yakında eklenecektir.
+> *Screenshots coming soon.*
+
+| Ana Sayfa | Deneyimler | Organizatör Paneli |
+|:---------:|:----------:|:-----------------:|
+| ![Ana Sayfa](docs/screenshots/home.png) | ![Deneyimler](docs/screenshots/experiences.png) | ![Organizatör](docs/screenshots/organizer.png) |
+
+---
+
+## Kurulum / Setup
+
+### Ön gereksinimler
 
 - Node.js 18+
 - Bir [Supabase](https://supabase.com) projesi
 
----
-
-## Kurulum
-
-### 1. Depoyu klonla
+### 1. Repoyu klonla
 
 ```bash
-git clone <repo-url>
-cd konyamda
+git clone https://github.com/mert-kaymak/KonyamDa.git
+cd KonyamDa
 npm install
 ```
 
@@ -48,29 +89,24 @@ npm install
 cp .env.example .env.local
 ```
 
-`.env.local` dosyasını aç ve Supabase proje bilgilerini doldur:
+`.env.local` dosyasını açıp Supabase bilgilerini gir:
 
-```
+```env
 NEXT_PUBLIC_SUPABASE_URL=https://<proje-id>.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key>
 ```
 
-> Supabase Dashboard → Project Settings → API sekmesinden bulabilirsin.
+> Supabase Dashboard → Project Settings → API
 
 ### 3. Veritabanı şemasını çalıştır
 
-Supabase Dashboard → SQL Editor'e git ve `supabase/schema.sql` dosyasının tüm içeriğini yapıştırıp çalıştır.
+Supabase Dashboard → SQL Editor'e git, `supabase/schema.sql` içeriğini yapıştır ve çalıştır.
 
-Bu işlem şu tabloları oluşturur:
-- `profiles` — Kullanıcı profilleri (auth trigger ile otomatik)
-- `categories` — Deneyim kategorileri (başlangıç verileriyle)
-- `experiences` — Deneyimler
-- `bookings` — Rezervasyonlar
-- `reviews` — Değerlendirmeler
+Oluşturulan tablolar: `profiles`, `categories`, `experiences`, `bookings`, `reviews`
 
-### 4. Google OAuth (isteğe bağlı)
+### 4. (İsteğe bağlı) Google OAuth
 
-Supabase Dashboard → Authentication → Providers → Google bölümünde OAuth credentials ekle.
+Supabase Dashboard → Authentication → Providers → Google  
 Callback URL: `https://<domain>/auth/callback`
 
 ### 5. Geliştirme sunucusunu başlat
@@ -93,61 +129,38 @@ npm run start    # Üretim sunucusu
 
 ---
 
-## Proje Yapısı
+## Ekip / Team
 
-```
-konyamda/
-├── app/
-│   ├── (auth)/              # Auth layout grubu
-│   │   ├── login/
-│   │   ├── register/
-│   │   ├── sifremi-unuttum/
-│   │   └── yeni-sifre/
-│   ├── auth/callback/       # OAuth & şifre sıfırlama callback
-│   ├── dashboard/           # Kullanıcı paneli
-│   ├── deneyimler/          # Liste ve detay sayfaları
-│   ├── organizator/         # Organizatör paneli (korumalı)
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx             # Ana sayfa
-├── components/
-│   ├── ui/                  # shadcn bileşenleri
-│   ├── navbar.tsx
-│   └── footer.tsx
-├── lib/
-│   ├── supabase/
-│   │   ├── client.ts        # Tarayıcı taraflı Supabase client
-│   │   └── server.ts        # Sunucu taraflı Supabase client
-│   └── utils.ts
-├── supabase/
-│   └── schema.sql           # Veritabanı şeması + RLS politikaları
-├── types/
-│   └── index.ts
-├── proxy.ts                 # Route koruması (Next.js 16 Middleware)
-├── next.config.ts
-└── .env.example
-```
+<table>
+  <tr>
+    <td align="center">
+      <img src="public/mert.jpg.png" width="80" style="border-radius:50%" /><br/>
+      <b>Mert Kaymak</b><br/>
+      <sub>Kurucu & CEO</sub>
+    </td>
+    <td align="center">
+      <img src="public/ahmet.jpg.jpeg" width="80" style="border-radius:50%" /><br/>
+      <b>Ahmet Alperen Arslan</b><br/>
+      <sub>Kurucu Ortak & CTO</sub>
+    </td>
+    <td align="center">
+      <img src="public/toygun.jpg.jpeg" width="80" style="border-radius:50%" /><br/>
+      <b>Toygun Galyan</b><br/>
+      <sub>Kurucu Ortak & CMO</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
-## Yayına Alma (Vercel)
+## İletişim / Contact
 
-1. Vercel'e projeyi import et
-2. Environment Variables bölümüne `.env.local` içindeki değişkenleri ekle
-3. Deploy et — Vercel Next.js'i otomatik algılar
-
-Alternatif olarak herhangi bir Node.js 18+ ortamında:
-
-```bash
-npm run build
-npm run start
-```
+**E-posta:** iletisim.konyamda@gmail.com  
+**Web:** [konyam-da.vercel.app](https://konyam-da.vercel.app)  
+**Adres:** Selçuklu, Konya, Türkiye
 
 ---
 
-## Veritabanı Notları
-
-- Tüm tablolarda **Row Level Security (RLS)** aktif
-- Yeni kullanıcı kaydında `profiles` tablosu otomatik doldurulur (trigger)
-- Organizatör yetkisi: `profiles.is_organizer = true`
-- Deneyim ekleme sadece `is_organizer = true` olan kullanıcılara izin verir
+<div align="center">
+  <sub>© 2026 konyamda — Konya'nın en canlı deneyim platformu</sub>
+</div>
